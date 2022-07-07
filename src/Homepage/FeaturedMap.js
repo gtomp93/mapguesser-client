@@ -20,7 +20,7 @@ const FeaturedMap = ({ game, isLiked }) => {
     }
 
     setLiked(!liked);
-    fetch(`https://mapguesser-server.herokuapp.com/likeGame/${game._id}`, {
+    fetch(`https://mapguesser-server.herokuapp.com/api/likeGame/${game._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         liked: !liked,
@@ -33,7 +33,7 @@ const FeaturedMap = ({ game, isLiked }) => {
     });
 
     await fetch(
-      `https://mapguesser-server.herokuapp.com/addLikeToUser/${currentUser._id}`,
+      `https://mapguesser-server.herokuapp.com/api/addLikeToUser/${currentUser._id}`,
       {
         method: "PUT",
         body: JSON.stringify({
