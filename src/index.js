@@ -16,8 +16,8 @@ const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
   <Auth0Provider
-    domain={domain}
-    clientId={clientId}
+    domain={"bitter-paper-2408.us.auth0.com"}
+    clientId={"Fz8kYmovLlR1H8HnWzSVDT7W8ObVFRuM"}
     redirectUri={window.location.origin}
     // redirectUri={
     // "https://dev-rgqyv6wo.us.auth0.com/api/v2/clients/6GQJ2r01PH7RZmFndEDkGIEKKv0A7569"
