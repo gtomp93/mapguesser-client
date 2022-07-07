@@ -19,7 +19,7 @@ const Homepage = () => {
   const { currentUser, status, setStatus } = useContext(UserContext);
   const [users, setUsers] = useState(null);
   useEffect(() => {
-    fetch("/getTopPlayers")
+    fetch("/api/getTopPlayers")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -27,7 +27,7 @@ const Homepage = () => {
       });
   }, []);
   useEffect(() => {
-    fetch("/featuredMaps")
+    fetch("/api/featuredMaps")
       .then((res) => res.json())
       .then((data) => {
         console.log(data.result);
