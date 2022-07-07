@@ -36,18 +36,24 @@ const Profile = ({ active }) => {
     if (currentUser) {
       if (currentUser && !isCancelled) {
         console.log(currentUser.games);
-        const gamesData = await fetch("/getPlayerGames", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ games: currentUser.maps }),
-        });
+        const gamesData = await fetch(
+          "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ games: currentUser.maps }),
+          }
+        );
         const parsedGamesData = await gamesData.json();
 
-        const likesData = await fetch("/getPlayerGames", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ games: currentUser.likes }),
-        });
+        const likesData = await fetch(
+          "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ games: currentUser.likes }),
+          }
+        );
 
         const parsedLikesData = await likesData.json();
         setGames({
@@ -63,14 +69,17 @@ const Profile = ({ active }) => {
   }, [currentUser]);
 
   const deleteGame = async (_id) => {
-    await fetch(`/deleteGame/${_id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await fetch(
+      `https://mapguesser-server.herokuapp.com/api/deleteGame/${_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    fetch("/removeFromUser", {
+    fetch("https://mapguesser-server.herokuapp.com/api/removeFromUser", {
       method: "PUT",
       body: JSON.stringify({ gameid: _id, user: currentUser._id }),
       headers: {

@@ -1,10 +1,10 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import {FiHeart, FiMessageCircle, FiPlay} from "react-icons/fi";
-import {Link} from "react-router-dom";
-import {UserContext} from "./UserContext";
+import { FiHeart, FiMessageCircle, FiPlay } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { UserContext } from "./UserContext";
 import Comment from "./Comment";
-import {BiTrash} from "react-icons/bi";
+import { BiTrash } from "react-icons/bi";
 
 const ProfileGame = ({
   game,
@@ -14,7 +14,7 @@ const ProfileGame = ({
   deleteGame,
 }) => {
   const [liked, setLiked] = useState(isLiked);
-  const {currentUser} = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [numLikes, setNumLikes] = useState(game.likes);
   const [comment, setComment] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -34,7 +34,7 @@ const ProfileGame = ({
   // }
 
   const likeGame = async () => {
-    fetch(`/likeGame/${game._id}`, {
+    fetch(`https://mapguesser-server.herokuapp.com/api/likeGame/${game._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         liked: !liked,
@@ -44,16 +44,19 @@ const ProfileGame = ({
       },
     }).then((res) => res.json());
 
-    await fetch(`/addLikeToUser/${currentUser._id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        likedGame: game._id,
-        liked: !liked,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    await fetch(
+      `https://mapguesser-server.herokuapp.com/api/addLikeToUser/${currentUser._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          likedGame: game._id,
+          liked: !liked,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log("HEERE");
@@ -68,17 +71,20 @@ const ProfileGame = ({
 
   const submitComment = async (comment) => {
     setUpdatePage(!updatePage);
-    await fetch(`/comment/${game._id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        comment: comment,
-        commentBy: currentUser._id,
-        pic: currentUser.picture,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    await fetch(
+      `https://mapguesser-server.herokuapp.com/api/comment/${game._id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          comment: comment,
+          commentBy: currentUser._id,
+          pic: currentUser.picture,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         console.log("Gotten here");
 
@@ -90,7 +96,7 @@ const ProfileGame = ({
   };
 
   return (
-    <div style={deleted ? {display: "none"} : {display: "block"}}>
+    <div style={deleted ? { display: "none" } : { display: "block" }}>
       <GameContainer>
         <Box>
           <GameBox>
@@ -115,7 +121,7 @@ const ProfileGame = ({
                   >
                     <FiHeart
                       size="22px"
-                      style={liked ? {fill: "red"} : {fill: "none"}}
+                      style={liked ? { fill: "red" } : { fill: "none" }}
                     />
                   </LikeButton>
                   <Likes>{numLikes ? numLikes : null}</Likes>{" "}
@@ -128,7 +134,7 @@ const ProfileGame = ({
                 </NumComments>
               </CommentBox>
               <StartGame to={`/gameOptions/${game._id}`}>
-                <FiPlay size="22px" style={{fill: "green"}} />
+                <FiPlay size="22px" style={{ fill: "green" }} />
                 <Play>Play</Play>
               </StartGame>
             </ActionBar>
@@ -197,7 +203,7 @@ const ProfileGame = ({
               setToggleDelete(true);
             }}
           >
-            <BiTrash style={{marginRight: "3px"}} />
+            <BiTrash style={{ marginRight: "3px" }} />
             Delete Map
           </StyledButton>
         </DeleteBox>
@@ -227,7 +233,7 @@ const ProfileGame = ({
                   deleteGame(game._id);
                   setDeleted(true);
                 }}
-                style={{marginLeft: "4px"}}
+                style={{ marginLeft: "4px" }}
               >
                 Yes
               </DeleteChoice>
@@ -235,7 +241,7 @@ const ProfileGame = ({
                 onClick={() => {
                   setToggleDelete(false);
                 }}
-                style={{marginLeft: "4px"}}
+                style={{ marginLeft: "4px" }}
               >
                 No
               </DeleteChoice>{" "}

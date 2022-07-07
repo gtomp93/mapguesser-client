@@ -111,7 +111,7 @@ const Map = () => {
 
   useEffect(() => {
     if (!locations && currentUser) {
-      fetch(`/getMap/${id}`, {
+      fetch(`https://mapguesser-server.herokuapp.com/api/getMap/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ currentUser }),
         headers: {

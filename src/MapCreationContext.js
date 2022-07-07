@@ -76,7 +76,7 @@ export const MapCreationContextProvider = ({ children }) => {
 
     if (mapState.pic) {
       console.log("spot1");
-      await fetch("/s3url")
+      await fetch("https://mapguesser-server.herokuapp.com/api/s3url")
         .then((res) => res.json())
         .then((res) => {
           url = res.url;
@@ -108,7 +108,7 @@ export const MapCreationContextProvider = ({ children }) => {
       creator: `${currentUser.givenName} ${currentUser.lastName}`,
     };
 
-    await fetch("/CreateMap", {
+    await fetch("https://mapguesser-server.herokuapp.com/api/CreateMap", {
       method: "POST",
       body: JSON.stringify(mapData),
       headers: {
@@ -120,7 +120,7 @@ export const MapCreationContextProvider = ({ children }) => {
         gameid = res._id;
       });
 
-    await fetch("/addMapToUser", {
+    await fetch("https://mapguesser-server.herokuapp.com/api/addMapToUser", {
       method: "PUT",
       body: JSON.stringify({ gameid, user: currentUser._id }),
       headers: {
