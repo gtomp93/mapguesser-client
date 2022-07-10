@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, { useContext } from "react";
 import MapInput from "./MapInput";
 import MapItem from "./MapItem";
 import styled from "styled-components";
@@ -11,11 +11,11 @@ import {
   StreetViewPanorama,
 } from "@react-google-maps/api";
 import { MapCreationContext } from "./MapCreationContext";
-import { Container } from "./Homepage/styledComponents";
 
 const streetViewStyle = {
   width: "75%",
   height: "250px",
+  zIndex: "0",
 };
 
 const libraries = ["places"];
@@ -42,13 +42,10 @@ const MapMaker = () => {
     return "loading maps";
   }
 
-  console.log(mapState.addresses);
-
   return (
     <BackgroundContainer>
       <InnerContainer>
         <h1>Map Creator- Part 2</h1>
-
         <Info>
           Enter an address and hit "Add Location" to add a location to your map.
         </Info>
@@ -58,7 +55,6 @@ const MapMaker = () => {
             <div>Your added locations will appear here</div>
           )}
           {mapState.addresses.map((address, index) => {
-            console.log(mapState.addresses[index]);
             return (
               <div style={{ border: "1px solid black" }}>
                 <MapItem address={address} dispatch={dispatch} index={index} />
@@ -72,17 +68,17 @@ const MapMaker = () => {
               </div>
             );
           })}
-          {mapState.addresses.length >= 5 && (
-            <button
-              onClick={async () => {
-                await addLocations(mapState.locations);
-                navigate("/Confirmation");
-              }}
-            >
-              Create Map
-            </button>
-          )}
-        </ListContainer>
+        </ListContainer>{" "}
+        {mapState.addresses.length >= 5 && (
+          <StyledButton
+            onClick={async () => {
+              await addLocations(mapState.locations);
+              navigate("/Confirmation");
+            }}
+          >
+            Create Map
+          </StyledButton>
+        )}
         {mapState.visibleLocation && (
           <GoogleMap
             mapContainerStyle={streetViewStyle}
@@ -116,7 +112,7 @@ const BackgroundContainer = styled.div`
   background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1228111945.jpg");
   background-size: cover;
   width: 100%;
-  height: calc(100vh - 44px);
+  min-height: calc(100vh - 44px);
   display: grid;
   place-items: center;
 `;
@@ -128,5 +124,12 @@ const InnerContainer = styled.div`
   flex-direction: column;
   max-width: 95%;
   color: rgba(193, 190, 190, 1);
+`;
+
+const StyledButton = styled.button`
+  font-size: 20px;
+  padding: 5px;
+  font-weight: bold;
+  width: fit-content;
 `;
 export default MapMaker;

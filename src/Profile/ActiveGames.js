@@ -9,7 +9,6 @@ import { UserContext } from "../UserContext";
 const ActiveGames = () => {
   const { currentUser } = useContext(UserContext);
   const [activeGames, setActiveGames] = useState(null);
-  console.log({ currentUser });
   useEffect(() => {
     fetch("https://mapguesser-server.herokuapp.com/api/getMaps", {
       method: "PATCH",
@@ -24,26 +23,21 @@ const ActiveGames = () => {
       });
   }, []);
 
-  console.log(activeGames);
-
   return (
     <Container>
       <Active>
-        <Subtitle>Active Games</Subtitle>
-
+        {activeGames?.length > 0 && <Subtitle>Active Games</Subtitle>}
         {activeGames &&
           activeGames.map((game) => {
-            console.log({ game });
             let date = "";
             if (game.type === "single") {
-              console.log({ thing: game.time });
-              date = format(game.time, "MMM do y 'at' h:m");
+              date = format(game.time, "MMM do y 'at' h:mm");
               //
             } else {
               let timestamp = game.players?.find(
                 (i) => i.player === currentUser.email
               ).time;
-              date = format(timestamp, "MMM do y 'at' h:m");
+              date = format(timestamp, "MMM do y 'at' hh:mm");
             }
             if (
               game.gameData?.length < 5 ||
@@ -83,20 +77,19 @@ const ActiveGames = () => {
           })}
       </Active>
       <Complete>
-        <Subtitle>Completed Games</Subtitle>
+        {activeGames?.length > 0 && <Subtitle>Completed Games</Subtitle>}
         {activeGames &&
           activeGames.map((game) => {
             let date = "";
 
             if (game.type === "single") {
-              console.log({ thing: game.time });
-              date = format(game.time, "MMM do y 'at' h:m");
+              date = format(game.time, "MMM do y 'at' h:mm");
               //
             } else {
               let timestamp = game.players?.find(
                 (i) => i.player === currentUser.email
               ).time;
-              date = format(timestamp, "MMM do y 'at' h:m");
+              date = format(timestamp, "MMM do y 'at' h:mm");
             }
 
             if (
@@ -132,6 +125,12 @@ const ActiveGames = () => {
               );
             }
           })}
+        {activeGames?.length === 0 && (
+          <Message>
+            You haven't played any games yet. Try refreshing the page if you
+            don't see a recent game!
+          </Message>
+        )}
       </Complete>
     </Container>
   );
@@ -181,4 +180,12 @@ const LastPlayed = styled.p`
   @media (max-width: 800px) {
     font-size: 16px;
   }
+`;
+
+const Message = styled.h2`
+  color: white;
+  margin-top: 20px;
+  max-width: 500px;
+  width: 95%;
+  text-align: center;
 `;

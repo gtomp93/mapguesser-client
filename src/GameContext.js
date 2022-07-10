@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useReducer,
-} from "react";
+import React, { createContext, useContext, useState, useReducer } from "react";
 import { UserContext } from "./UserContext";
 
 export const GameContext = createContext(null);
@@ -72,9 +66,10 @@ const gameReducer = (state, action) => {
         locationIndex: state.locationIndex + 1,
         zoom: 2,
         center: { lat: 0, lng: 0 },
+        timer: 60,
       };
-    case "error":
-      return { ...state, error: action.error };
+    // case "error":
+    //   return { ...state, error: action.error };
     default:
       return state;
   }
@@ -96,7 +91,7 @@ const initialGame = {
   error: null,
   endGame: false,
   stop: false,
-  timer: 60,
+  timer: 3,
   timeMode: null,
   thirdPoint: null,
   gameLink: null,
@@ -107,6 +102,8 @@ export const GameContextProvider = ({ children }) => {
   const { currentUser } = useContext(UserContext);
 
   const [gameState, dispatch] = useReducer(gameReducer, initialGame);
+  const [midpoint, setMidpoint] = useState(null);
+  const [testPoint, setTestPoint] = useState(null);
 
   const [opponent, setOpponent] = useState(null);
   const [timer, setTimer] = useState(60);
@@ -125,7 +122,6 @@ export const GameContextProvider = ({ children }) => {
       .then((res) => res.json())
       .then((res) => {
         if (res.doesNotExist) {
-          // console.log("player not found");
         } else if (!res.doesNotExist) {
           setOpponent(email);
         }
@@ -142,7 +138,7 @@ export const GameContextProvider = ({ children }) => {
     id
   ) => {
     let score = 0;
-    let zoom = 0;
+    let zoom = 1;
     let endGame = false;
     let timeMode = gameState.timeMode;
     let otherPlayerData = null;
@@ -155,75 +151,83 @@ export const GameContextProvider = ({ children }) => {
       otherPlayerData = parsedResult.data;
     }
 
-    if (guessDistance > 3000000) {
-      zoom = 1;
-    } else if (
-      guessDistance > 1000000 &&
-      (clickspotLat > 58 || clickspotLat < -58)
+    if (
+      lat === null ||
+      lng === null ||
+      clickSpotLng === null ||
+      clickspotLat === null
     ) {
-      zoom = 2;
-    } else if (guessDistance > 1750000) {
-      zoom = 2;
-    } else if (guessDistance > 1000000) {
-      zoom = 3;
-    } else if (guessDistance > 500000) {
-      zoom = 4;
-    } else if (guessDistance > 200000) {
-      zoom = 5;
-    } else if (guessDistance > 100000) {
-      zoom = 6;
-    } else if (guessDistance > 50000) {
-      zoom = 7;
-    } else if (guessDistance > 20000) {
-      zoom = 8;
-    } else if (guessDistance > 5000) {
-      zoom = 9;
-    } else if (guessDistance > 1000) {
-      zoom = 10;
+      guessDistance = null;
     } else {
-      zoom = 11;
-    }
+      if (guessDistance > 3000000) {
+        zoom = 1;
+      } else if (
+        guessDistance > 1000000 &&
+        (clickspotLat > 58 || clickspotLat < -58)
+      ) {
+        zoom = 2;
+      } else if (guessDistance > 1750000) {
+        zoom = 2;
+      } else if (guessDistance > 1000000) {
+        zoom = 3;
+      } else if (guessDistance > 500000) {
+        zoom = 4;
+      } else if (guessDistance > 200000) {
+        zoom = 5;
+      } else if (guessDistance > 100000) {
+        zoom = 6;
+      } else if (guessDistance > 50000) {
+        zoom = 7;
+      } else if (guessDistance > 20000) {
+        zoom = 8;
+      } else if (guessDistance > 5000) {
+        zoom = 9;
+      } else if (guessDistance > 1000) {
+        zoom = 10;
+      } else {
+        zoom = 11;
+      }
 
-    if (guessDistance <= 100) {
-      score = 2000;
-    } else if (guessDistance <= 250) {
-      score = 1975;
-    } else if (guessDistance <= 500) {
-      score = 1950;
-    } else if (guessDistance <= 1000) {
-      score = 1900;
-    } else if (guessDistance <= 2000) {
-      score = 1850;
-    } else if (guessDistance <= 20000) {
-      score = 1800;
-    } else if (guessDistance <= 50000) {
-      score = 1750;
-    } else if (guessDistance <= 100000) {
-      score = 1700;
-    } else if (guessDistance <= 150000) {
-      score = 1600;
-    } else if (guessDistance <= 200000) {
-      score = 1500;
-    } else if (guessDistance <= 300000) {
-      score = 1400;
-    } else if (guessDistance <= 400000) {
-      score = 1200;
-    } else if (guessDistance <= 700000) {
-      score = 1000;
-    } else if (guessDistance <= 1200000) {
-      score = 800;
-    } else if (guessDistance <= 1600000) {
-      score = 600;
-    } else if (guessDistance <= 2000000) {
-      score = 500;
-    } else if (guessDistance <= 4000000) {
-      score = 400;
-    } else if (guessDistance <= 5000000) {
-      score = 200;
-    } else if (guessDistance <= 6000000) {
-      score = 100;
+      if (guessDistance <= 100) {
+        score = 2000;
+      } else if (guessDistance <= 250) {
+        score = 1975;
+      } else if (guessDistance <= 500) {
+        score = 1950;
+      } else if (guessDistance <= 1000) {
+        score = 1900;
+      } else if (guessDistance <= 2000) {
+        score = 1850;
+      } else if (guessDistance <= 20000) {
+        score = 1800;
+      } else if (guessDistance <= 50000) {
+        score = 1750;
+      } else if (guessDistance <= 100000) {
+        score = 1700;
+      } else if (guessDistance <= 150000) {
+        score = 1600;
+      } else if (guessDistance <= 200000) {
+        score = 1500;
+      } else if (guessDistance <= 300000) {
+        score = 1400;
+      } else if (guessDistance <= 400000) {
+        score = 1200;
+      } else if (guessDistance <= 700000) {
+        score = 1000;
+      } else if (guessDistance <= 1200000) {
+        score = 800;
+      } else if (guessDistance <= 1600000) {
+        score = 600;
+      } else if (guessDistance <= 2000000) {
+        score = 500;
+      } else if (guessDistance <= 4000000) {
+        score = 400;
+      } else if (guessDistance <= 5000000) {
+        score = 200;
+      } else if (guessDistance <= 6000000) {
+        score = 100;
+      }
     }
-
     if (gameState.locationIndex === gameState.locations.length - 1) {
       endGame = true;
       timeMode = null;
@@ -231,15 +235,20 @@ export const GameContextProvider = ({ children }) => {
 
     dispatch({
       type: "submitGuess",
-      center: { lat, lng },
+      center: lat ? { lat, lng } : { lat: 0, lng: 0 },
       guessDistance,
       ans: gameState.locations[gameState.locationIndex],
-      guess: { lat: clickspotLat, lng: clickSpotLng },
+      guess: clickspotLat
+        ? {
+            lat: clickspotLat,
+            lng: clickSpotLng,
+          }
+        : null,
       score,
       zoom,
       endGame,
       timeMode,
-      thirdPoint,
+      thirdPoint: thirdPoint ? thirdPoint : { lat: 0, lng: 0 },
       otherPlayerData,
     });
 
@@ -251,7 +260,7 @@ export const GameContextProvider = ({ children }) => {
         score,
         distance: guessDistance,
         ans: gameState.locations[gameState.locationIndex],
-        guess: { lat: clickspotLat, lng: clickSpotLng },
+        guess: clickspotLat ? { lat: clickspotLat, lng: clickSpotLng } : null,
         thirdPoint,
         center: { lat, lng },
         player: currentUser.email,
@@ -277,7 +286,7 @@ export const GameContextProvider = ({ children }) => {
         }
       )
         .then((res) => res.json())
-        .then((res) => console.log(res, "update user score response"));
+        .then((res) => {});
   };
 
   const resetMap = async () => {
@@ -292,11 +301,14 @@ export const GameContextProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     });
+
     dispatch({ type: "resetMap" });
+    setMidpoint(null);
+    setTestPoint(null);
     setTimer(60);
+    return;
   };
 
-  // console.log(timer);
   return (
     <GameContext.Provider
       value={{
@@ -309,6 +321,10 @@ export const GameContextProvider = ({ children }) => {
         searchOpponent,
         timer,
         setTimer,
+        midpoint,
+        setMidpoint,
+        testPoint,
+        setTestPoint,
       }}
     >
       {children}

@@ -7,18 +7,10 @@ const AddNameModal = () => {
   const [name, setName] = useState({});
   const [error, setError] = useState(false);
   const { user } = useAuth0();
-  const {
-    status,
-    setStatus,
-    currentUser,
-    setCurrentUser,
-    setReloadUser,
-    reloadUser,
-  } = useContext(UserContext);
-  console.log("status", status);
+  const { setStatus, currentUser, setCurrentUser, setReloadUser, reloadUser } =
+    useContext(UserContext);
   const closeModal = (ev) => {
     ev.preventDefault();
-    console.log("here", name.firstName, name.lastName);
     if (name.firstName?.length > 0 && name.lastName?.length > 0) {
       fetch("https://mapguesser-server.herokuapp.com/api/addName", {
         method: "PATCH",
@@ -33,7 +25,6 @@ const AddNameModal = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data, "data");
           if (data.status === 200) {
             setCurrentUser({
               ...currentUser,

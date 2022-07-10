@@ -1,28 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from "../UserContext";
-import ProfileGame from "../ProfileGame";
-import Game from "../Game";
+
 import styled from "styled-components";
 import { Loading } from "../Loading";
-import LogoutButton from "../LogoutButton";
 import { FiLogOut } from "react-icons/fi";
-import { Outlet, useParams, NavLink } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import { ModalContext } from "../ModalContext";
 
-const Profile = ({ active }) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+const Profile = () => {
+  const { isAuthenticated } = useAuth0();
   const { currentUser } = useContext(UserContext);
   const [games, setGames] = useState({});
   const { setShowModal } = useContext(ModalContext);
-  // const [showGames, setShowGames] = useState("liked");
   const { logout } = useAuth0();
-  console.log("currentUser", currentUser);
-  // background: inherit;
-  // font-size: 24px;
-  // border: none;
-  // text-decoration: none;
-  //color:"#9897a1"
 
   const navLinkStyle = {
     background: "inherit",
@@ -35,7 +26,6 @@ const Profile = ({ active }) => {
 
     if (currentUser) {
       if (currentUser && !isCancelled) {
-        console.log(currentUser.games);
         const gamesData = await fetch(
           "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
           {
@@ -87,16 +77,8 @@ const Profile = ({ active }) => {
       },
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {});
   };
-
-  console.log("games", games);
-
-  // if (isLoading || !currentUser || !Object.values(games).length) {
-  //   return <Loading />;
-  // }
-
-  console.log(games, "games");
 
   return (
     <ScrollContainer>

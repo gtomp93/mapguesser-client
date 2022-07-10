@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import Game from "../Game";
 import { UserContext } from "../UserContext";
 import { Container, SubTitle } from "./styledComponents";
 import FeaturedMap from "./FeaturedMap";
@@ -10,12 +9,9 @@ const Featured = ({ showModal, setShowModal, maps }) => {
 
   return (
     <StyledContainer>
-      <SubTitle style={{ color: "#1256d4", color: "darkblue" }}>
-        {" "}
-        Featured Maps{" "}
-      </SubTitle>
+      <SubTitle style={{ fontSize: "38px" }}> Featured Maps </SubTitle>
       <StyledWrapper>
-        {maps?.map((game, index) => {
+        {maps?.map((game) => {
           let isLiked = currentUser?.likes.includes(game._id);
 
           return (
@@ -42,11 +38,14 @@ const StyledContainer = styled(Container)`
   /* > div {
     width: 100%;
   } */
+  /* height: auto; */
+  max-height: 100%;
+  padding-bottom: 0;
 `;
 
 const StyledWrapper = styled.div`
+  /* flex: 1; */
+  height: calc(100% - 48px);
   display: flex;
   gap: 25px;
-  height: calc(100% - 29px);
-  /* height: 100%; */
 `;

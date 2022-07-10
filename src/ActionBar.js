@@ -3,12 +3,21 @@ import { FiHeart, FiMessageCircle, FiPlay } from "react-icons/fi";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import { ModalContext } from "./ModalContext";
 
-const ActionBar = ({ likeGame, game, numLikes, setNumLikes, liked, type }) => {
-  const { currentUser, setStatus, status } = useContext(UserContext);
-
+const ActionBar = ({
+  likeGame,
+  game,
+  numLikes,
+  setNumLikes,
+  liked,
+  type,
+  featured,
+}) => {
+  const { currentUser, setStatus } = useContext(UserContext);
+  const { setShowModal } = useContext(ModalContext);
   return (
-    <ActionBarContainer>
+    <ActionBarContainer featured={featured}>
       <LikeBox>
         <LikeButton
           onClick={(ev) => {
@@ -50,6 +59,8 @@ const ActionBar = ({ likeGame, game, numLikes, setNumLikes, liked, type }) => {
       </CommentBox>
       <StartGame
         onClick={(ev) => {
+          setShowModal(false);
+
           if (!currentUser) {
             setStatus({ error: "play" });
             ev.preventDefault();
@@ -117,31 +128,10 @@ const Likes = styled.span`
   margin-bottom: 4px;
 `;
 
-const StyledButton = styled.button`
-  background-color: rgba(0, 0, 0, 0.87);
-  /* color: #b9bec7; */
-  margin-top: 4px;
-  /* border: solid grey 1px; */
-  border: none;
-  border-radius: 4px;
-  color: #5a7bb0;
-  box-shadow: 0 0 10px rgb(255 255 255 / 10%);
-
-  font-weight: bold;
-  padding: 4px 7px 4px;
-  &:disabled {
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: none;
-  }
-`;
-
 const ActionBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  @media (min-width: 769px) {
-    /* width: 93%; */
-  }
+  margin-top: ${({ featured }) => (featured ? "4px" : "10px")};
 `;
 
 export default ActionBar;

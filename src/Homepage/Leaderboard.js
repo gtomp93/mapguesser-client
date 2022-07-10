@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Container } from "./styledComponents";
 import { SubTitle } from "./styledComponents";
 import { FaMedal } from "react-icons/fa";
@@ -22,8 +21,9 @@ const Leaderboard = ({ users }) => {
               <Heading>Score</Heading>
             </Row>
             {users?.map((user) => {
+              console.log({ user });
               return (
-                <Row>
+                <Row key={user._id}>
                   <Pic>
                     {" "}
                     <ProfPic src={user.picture} />
@@ -40,33 +40,11 @@ const Leaderboard = ({ users }) => {
   );
 };
 
-// const SubTitle = styled.h2`
-//   font-size: 32px;
-//   color: lightskyblue;
-//   text-align: left;
-//   padding-left: 5px;
-//   padding-top: 0;
-// `;
-
-const movingBackground = keyframes`
-0%{background-position: right center}
-25%{background-position:center center}
-50%{background-position: left center}
-25%{background-position:center center}
-100%{background-position: right center}
-`;
-
 const StyledContainer = styled(Container)`
-  /* background: rgb(0, 0, 0, 0.55); */
-  /* background-image: linear-gradient(
-    225deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(147, 147, 147, 0.5) 50%,
-    rgba(255, 255, 255, 0.5) 100%
-  );
-  background-size: 400%; */
+  @media (max-width: 1149px) {
+    height: 500px;
+  }
 
-  /* animation: ${movingBackground} 7s forwards infinite; */
   display: flex;
   flex-direction: column;
 
@@ -77,21 +55,32 @@ const ScrollContainer = styled.div`
   overflow-y: auto;
   width: 100;
   height: 100%;
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    background: rgba(250, 250, 250, 0.4);
+    width: 15px;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 15px;
+    background: rgba(157, 156, 156, 0.7);
+    border-radius: 8px;
+  }
 `;
 
 const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
   @media (min-width: 1740px) {
-    /* width: 95%; */
   }
 `;
 
 const Row = styled.tr`
   tr:not(:first-child) {
-    /* display: block; */
   }
-  /* display: flex; */
   width: 100%;
 `;
 
@@ -108,7 +97,6 @@ const Pic = styled.td`
   height: 40px;
   float: right;
   width: fit-content;
-  /* border: 1px solid red; */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -121,12 +109,9 @@ const Name = styled.td`
   color: black;
   border: 2px solid black;
   width: 200px;
-  /* background: rgba(0, 0, 0, 0.6); */
   font-weight: bold;
-  /* margin-right: 5px; */
   text-align: left;
-  /* border: 2px solid white; */
-  /* padding: 3px; */
+
   font-size: 25px;
   :nth-child(1) {
     width: 35px;
@@ -139,20 +124,8 @@ const Name = styled.td`
   }
 `;
 
-const User = styled.tr`
-  /* display: flex; */
-`;
-
 const Heading = styled.th`
   font-size: 30px;
 `;
-
-// const Container = styled.div`
-//   position: relative;
-//   /* z-index: 700; */
-//   color: yellow;
-//   background-color: rgb(0, 0, 0, 0.6);
-//   padding: 10px;
-// `;
 
 export default Leaderboard;

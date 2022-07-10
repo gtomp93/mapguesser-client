@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-// import {userInfo} from "os";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import styled from "styled-components";
 import { UserContext } from "./UserContext";
 import Game from "./Game";
 import Error from "./Error";
-import LogoutButton from "./LogoutButton";
-import { GameContext } from "./GameContext";
 import { Loading } from "./Loading";
-import { BiWorld } from "react-icons/bi";
 import Search from "./Search";
 import { ModalContext } from "./ModalContext";
 
@@ -19,52 +14,38 @@ const Explore = () => {
   const [games, setGames] = useState(null);
   const [updatePage, setUpdatePage] = useState(false);
   const { currentUser } = useContext(UserContext);
-  const { setSelected, dispatch, resetMap } = useContext(GameContext);
-  const [fullList, setFullList] = useState(null);
   const { status, setStatus } = useContext(UserContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
-  console.log(page, "page");
-  console.log({ showModal });
-
-  useEffect(() => {
-    if (id) setShowModal(id);
-    return () => setShowModal(null);
-  }, []);
 
   useEffect(() => {
     fetch(`https://mapguesser-server.herokuapp.com/api/getGames?page=${page}`)
       .then((res) => res.json())
       .then((res) => {
         setGames(res.result);
-        setFullList(res.result);
       });
-    dispatch({ type: "clearGame" });
   }, [currentUser, updatePage, page]);
 
   return (
     <>
-      <Container>
+      <Container full={games?.length > 19}>
         <ParallaxWrapper>
-          {status && <Error status={status} setStatus={setStatus} />}
-          <Background
-            /*src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/pexels-pixabay-87651.jpg" src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1228111945.jpg"*/
-            src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg"
-          />
+          {status && status !== "noName" && (
+            <Error status={status} setStatus={setStatus} />
+          )}
+          {games?.length > 19 && (
+            <Background src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg" />
+          )}
 
-          {/* <Background src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/287620190-huge.jpg" /> */}
           {games ? (
             <GamesWrapper>
               {" "}
               <TopWrapper>
                 <Title>Search Maps</Title>{" "}
                 <Search setShowModal={setShowModal} />
-                {/* <GlobeSpinner speed={10000} /> */}
               </TopWrapper>
-              <GamesGrid
-              // onLoad={calculateHeight}
-              >
-                {games.map((game, index) => {
+              <GamesGrid>
+                {games.map((game) => {
                   let isLiked = currentUser?.likes.includes(game._id);
                   return (
                     <Game
@@ -83,28 +64,19 @@ const Explore = () => {
                 {page > 1 && (
                   <Page
                     style={{ color: "white" }}
-                    onClick={() =>
-                      setSearchParams(
-                        { page: page - 1 }
-                        // pg ? { page: pg + 1 } : { page: 2 }
-                      )
-                    }
+                    onClick={() => setSearchParams({ page: page - 1 })}
                   >
                     Previous
                   </Page>
                 )}
-                <Page
-                  // to="/explore/?page="
-                  style={{ color: "white" }}
-                  onClick={() =>
-                    setSearchParams(
-                      { page: page + 1 }
-                      // pg ? { page: pg + 1 } : { page: 2 }
-                    )
-                  }
-                >
-                  Next
-                </Page>
+                {games.length > 19 && (
+                  <Page
+                    style={{ color: "white" }}
+                    onClick={() => setSearchParams({ page: page + 1 })}
+                  >
+                    Next
+                  </Page>
+                )}
               </PageContainer>
             </GamesWrapper>
           ) : (
@@ -116,7 +88,6 @@ const Explore = () => {
   );
 };
 const Container = styled.div`
-  /* background: red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,8 +97,13 @@ const Container = styled.div`
   overflow-x: hidden;
   perspective: 10px;
   perspective-origin: bottom;
-  /* position: relative; */
-  /* background: black; */
+  background-image: ${({ full }) =>
+    full
+      ? "none"
+      : `url(
+      https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg
+    )`};
+  background-size: cover;
 `;
 
 const GamesWrapper = styled.div`
@@ -154,16 +130,12 @@ const GamesGrid = styled.div`
 
 const ParallaxWrapper = styled.div`
   position: relative;
-  /* flex: 1; */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   transform-style: preserve-3d;
   z-index: -1;
-  /* overflow: hidden; */
-  /* background: pink; */
-  /* border: solid cyan 15px; */
 `;
 
 const PageContainer = styled.div`
@@ -201,7 +173,6 @@ const Page = styled.button`
   -moz-box-shadow: 4px 6px 14px 0px rgba(0, 0, 0, 0.33);
   color: white;
   background-color: blue;
-  /* width: 190px; */
   font-size: 20px;
   font-weight: bold;
   width: fit-content;
@@ -218,8 +189,6 @@ const Background = styled.img`
   transform: translateZ(-30px) scale(4);
   top: 12%;
   height: 35.3%;
-  /*  HERE top: 500px;
-  height: 37%; */
 
   @media (min-width: 680px) {
     top: 2000px;
@@ -227,35 +196,27 @@ const Background = styled.img`
   }
 
   @media (min-width: 756px) {
-    /* top: 200px; */
     top: 0px;
     transform: translateZ(-20px) scale(3);
-    /* height: calc(50.5% - 30px); */
-    /* @media (min-height: 750px) { */
-    /* top: 1400px; */
-    /* height: 32%; */
-    /* } */
+
     height: 50.3%;
   }
-  /* @media (min-width: 756px) {
-    /* top: 300px; */
+  @media (min-height: 1246px) {
+    top: -500px;
+  }
 
   @media (min-width: 1148px) {
     height: 66%;
-    /* top: auto; */
     top: -400px;
     height: 56.4%;
   }
-  @media (min-height: 900px) and (min-width: 1148px) and (max-width: 1400px) {
-    top: -400px;
-    /* top: -1000px; */
+  @media (min-height: 900px) and (min-width: 1148px) {
+    top: -450px;
     height: 56.5%;
   }
 
   @media (min-height: 900px) and (min-width: 1400px) and (max-width: 1525px) {
     top: -450px;
-    /* top: -1000px; */
-    height: 57%;
   }
 
   @media (min-width: 1526px) {
@@ -264,28 +225,14 @@ const Background = styled.img`
 
   @media (min-height: 920px) and (min-width: 1526px) {
     top: -700px;
-    /* top: -400px; */
-    /* top: -1000px; */
+
     height: 65.5%;
   }
 
   @media (min-width: 1906px) {
     top: -900px;
     height: 74%;
-    /* top: 0px; */
-    /* height: 67%; */
-    /* transform: translateZ(-10px) scale(2); */
-    /* @media (min-height: 780px) { */
-    /* top: -150px; */
-    /* height: 72%; */
   }
-  /* } */
-  /* @media screen and (min-width: 1905px) { */
-  /* height: 75%; */
-  /* top: -270px; */
-  /* } */
 `;
-
-const Likes = styled.span``;
 
 export default Explore;

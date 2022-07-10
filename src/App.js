@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import logo from "./logo.svg";
+import React, { useContext } from "react";
 import Homepage from "./Homepage";
 import CreateMapForm from "./CreateMapForm";
-import Map from "./Map";
 import Login from "./Login";
 import Logout from "./Logout";
 import Header from "./Header";
@@ -11,8 +9,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./Profile";
 import Explore from "./Explore";
 import GlobalStyle from "./GlobalStyle";
-// import {useAuth0} from "@auth0/auth0-react";
-import CreateMap from "./CreateMap";
 import MapMaker from "./MapMaker";
 import Confirmation from "./Confirmation";
 import GameModal from "./GameModal";
@@ -21,14 +17,9 @@ import CreatedGames from "./Profile/CreatedGames";
 import { UserContext } from "./UserContext";
 import AddNameModal from "./AddNameModal";
 import ActiveGames from "./Profile/ActiveGames";
-
-// import {Auth0Provider} from "@auth0/auth0-react";
-// import LoginButton from "./LoginButton";
+import GameMap from "./GameMap";
 
 function App() {
-  //  const {domain, clientId, redirectUri} = useContext(Auth0Provider);
-  // const {user, isAuthenticated, isLoading} = useAuth0();
-  // const [showModal, setShowModal] = useState(null);
   const { status } = useContext(UserContext);
 
   return (
@@ -46,7 +37,7 @@ function App() {
             <Route path="/explore/game/:id" element={<GameModal />} />
           </Route>
           <Route exact path="/gameOptions/:id" element={<GameOptions />} />
-          <Route exact path="/map/:id" element={<Map />} />
+          <Route exact path="/map/:id" element={<GameMap />} />
 
           <Route exact path="/CreateMapForm" element={<CreateMapForm />} />
 

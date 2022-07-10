@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import _debounce from "lodash/debounce";
 import { Link } from "react-router-dom";
@@ -15,18 +15,15 @@ const Search = ({ showModal, setShowModal }) => {
   };
   useEffect(() => {
     document.addEventListener("click", clickOutside);
-    console.log("heya");
     return () => document.removeEventListener("click", clickOutside);
   }, [ref]);
 
   const debounceFunc = _debounce((inputText) => {
-    console.log({ inputValue });
     fetch(
       `https://mapguesser-server.herokuapp.com/api/searchMaps?searchQuery=${inputText}`
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSuggestions(data.data);
       });
   }, 500);
@@ -35,8 +32,6 @@ const Search = ({ showModal, setShowModal }) => {
     setInputValue(e.target.value);
     debounceFunc(e.target.value);
   };
-
-  console.log(suggestions);
 
   return (
     <Container>
@@ -81,7 +76,7 @@ const Searchbar = styled.input`
   position: relative;
   z-index: 2;
   width: 200px;
-  background-color: #eae9ebbb;
+  background-color: #eae9ebd0;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 10%);
   height: 30px;
