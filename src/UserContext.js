@@ -64,13 +64,10 @@ export const UserContextProvider = ({ children }) => {
           });
 
           if (!user.given_name || !user.family_name) {
-            console.log("here1");
             setStatus("noName");
           }
         } else {
           if (!userInfo.givenName || !userInfo.lastName) {
-            console.log("here2");
-
             setStatus("noName");
           }
           setCurrentUser(userInfo);

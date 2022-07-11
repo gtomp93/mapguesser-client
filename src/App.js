@@ -30,7 +30,7 @@ function App() {
         {status === "noName" && <AddNameModal />}
         <Routes>
           <Route exact path="/" element={<Homepage />}>
-            <Route exact path="/game/:id" element={<GameModal />} />
+            <Route path="/game/:id" element={<GameModal />} />
           </Route>
 
           <Route exact path="/explore" element={<Explore />}>
