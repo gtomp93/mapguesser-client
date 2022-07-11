@@ -26,22 +26,10 @@ const Wrapper = styled.div`
     min-height: 33vw;
   }
   height: 100%;
-  /* position: relative; */
   background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1302294157.jpg");
   background-size: cover;
   background-position: center;
 `;
-
-// const Img = styled.img`
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   object-fit: cover;
-//   z-index: 2;
-//   top: 0;
-
-//   /* padding: 12px; */
-// `;
 
 const StyledContainer = styled(Container)`
   padding: 12px 12px 12px;
