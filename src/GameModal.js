@@ -143,7 +143,7 @@ export default function GameModal() {
               {gameInfo.comments.length > 2 && (
                 <View
                   onClick={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     setViewMore(!viewMore);
                   }}
                 >
