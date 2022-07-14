@@ -9,7 +9,6 @@ import Search from "./Search";
 import { ModalContext } from "./ModalContext";
 
 const Explore = () => {
-  console.log("hey");
   const { id } = useParams();
   const { showModal, setShowModal } = useContext(ModalContext);
   const [games, setGames] = useState(null);
