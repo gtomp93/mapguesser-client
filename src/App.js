@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/explore" element={<Explore />}>
             <Route path="/explore/game/:id" element={<GameModal />} />
           </Route>
-          <Route path={"/map/:id"} element={<MapDetails />} />
+          <Route path={"/mapDetails/:id"} element={<MapDetails />} />
           <Route exact path="/gameOptions/:id" element={<GameOptions />} />
           <Route exact path="/map/:id" element={<GameMap />} />
 

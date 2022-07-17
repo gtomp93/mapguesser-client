@@ -45,7 +45,7 @@ const Search = ({ showModal, setShowModal }) => {
           {suggestions.map((suggestion) => {
             return (
               <Suggestion
-                to={`/map/${suggestion._id}`}
+                to={`/mapDetails/${suggestion._id}`}
                 onClick={() => {
                   // setShowModal(suggestion._id);
                   setSuggestions([]);
