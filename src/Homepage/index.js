@@ -87,10 +87,9 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   height: ${({ users, maps }) => (users && maps ? "100%" : "100vh")};
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1228111945.jpg");
   background-size: cover;
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/287620190-huge.jpg");
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg");
+  /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg"); */
+  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/cropped+HK+pic.jpg");
   justify-content: space-around;
   a {
     color: black;

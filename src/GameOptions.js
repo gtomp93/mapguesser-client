@@ -32,7 +32,7 @@ const GameOptions = () => {
     await fetch("https://mapguesser-server.herokuapp.com/api/createGame", {
       method: "POST",
       body: JSON.stringify({
-        player: currentUser.email,
+        player: currentUser,
         icon: currentUser.picture,
         locations: randomLocations,
         mode: playerMode,
@@ -50,7 +50,7 @@ const GameOptions = () => {
         if (playerMode === "single") {
           navigate(`/map/${gameId}`);
         } else {
-          setGameLink(`https://mapguesser-server.herokuapp.com/map/${gameId}`);
+          setGameLink(`https://mapguesser-client.herokuapp.com/map/${gameId}`);
           setNewGameId(gameId);
           return gameId;
         }

@@ -85,6 +85,11 @@ export const UserContextProvider = ({ children }) => {
     }
   }, [isAuthenticated, isLoading, reloadUser]);
 
+  // useEffect(()=>{
+  //     timer > 0 && !stop && setTimeout(() => setTimer(timer - 1), 1000);
+
+  // },[timer])
+
   return (
     <UserContext.Provider
       value={{
