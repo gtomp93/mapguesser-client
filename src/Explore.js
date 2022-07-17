@@ -197,7 +197,7 @@ const Background = styled.img`
   overflow: hidden;
   transform: translateZ(-30px) scale(4);
   top: 12%;
-  height: 35.3%;
+  height: 35.5%;
 
   @media (min-width: 680px) {
     top: 2000px;
