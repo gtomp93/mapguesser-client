@@ -1,25 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import Comment from "./Comment";
-import { UserContext } from "./UserContext";
-import ReactDOM from "react-dom";
-import ActionBar from "./ActionBar";
 import { BiX } from "react-icons/bi";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { Loading } from "./Loading";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import ActionBar from "./ActionBar";
+import Comment from "./Comment";
 import Error from "./Error";
-import { ModalContext } from "./ModalContext";
-export default function GameModal() {
+import { Loading } from "./Loading";
+import { UserContext } from "./UserContext";
+
+const MapDetails = () => {
+  const { id } = useParams();
+
   const [comment, setComment] = useState("");
   const { currentUser, status, setStatus } = useContext(UserContext);
   const [inputValue, setInputValue] = useState("");
   const [viewMore, setViewMore] = useState(false);
-  const { id } = useParams();
   const [gameInfo, setGameInfo] = useState(null);
   const [updatePage, setUpdatePage] = useState(false);
-  const [liked, setLiked, numLikes, setNumLikes, game, route] =
-    useOutletContext();
-  const { setShowModal, showModal } = useContext(ModalContext);
+  const [liked, setLiked] = useState(
+    currentUser ? currentUser.likes.includes(id) : false
+  );
+  const [numLikes, setNumLikes] = useState(0);
   const navigate = useNavigate();
   const likeGame = async () => {
     if (!currentUser) {
@@ -28,7 +29,7 @@ export default function GameModal() {
     }
 
     setLiked(!liked);
-    fetch(`https://mapguesser-server.herokuapp.com/api/likeGame/${game._id}`, {
+    fetch(`https://mapguesser-server.herokuapp.com/api/likeGame/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
         liked: !liked,
@@ -45,7 +46,7 @@ export default function GameModal() {
       {
         method: "PUT",
         body: JSON.stringify({
-          likedGame: game._id,
+          likedGame: id,
           liked: !liked,
         }),
         headers: {
@@ -98,7 +99,11 @@ export default function GameModal() {
       .then((res) => {
         setGameInfo(res.result);
       });
-  }, [id]);
+  }, [id, currentUser]);
+
+  useEffect(() => {
+    if (currentUser) setLiked(currentUser.likes.includes(id));
+  }, [currentUser]);
 
   const { name, description, creator, pic } = gameInfo
     ? gameInfo
@@ -111,8 +116,8 @@ export default function GameModal() {
         likes: undefined,
       };
 
-  return ReactDOM.createPortal(
-    <Overlay>
+  return (
+    <Background>
       {status === "loginError" && <Error setStatus={setStatus} />}
 
       <ModalContainer gameInfo={gameInfo}>
@@ -124,7 +129,7 @@ export default function GameModal() {
             <MapImage src={pic} />
             <ActionBar
               likeGame={likeGame}
-              numLikes={numLikes}
+              numLikes={gameInfo?.likes}
               setNumLikes={setNumLikes}
               game={gameInfo}
               liked={liked}
@@ -179,7 +184,7 @@ export default function GameModal() {
             <Loading />
           </div>
         )}
-        <CloseModal
+        {/* <CloseModal
           onClick={(ev) => {
             ev.stopPropagation();
             navigate(route ? route : "/profile");
@@ -187,38 +192,21 @@ export default function GameModal() {
           }}
         >
           <BiX />
-        </CloseModal>
+        </CloseModal> */}
       </ModalContainer>
-    </Overlay>,
-    document.getElementById("portal")
+    </Background>
   );
-}
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 4;
+};
+
+const Background = styled.div`
+  width: 100%;
+  height: calc(100vh - 44px);
+  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg");
+  background-size: cover;
 `;
 
 const Title = styled.h1`
   margin: 0;
-`;
-
-const CloseModal = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 8;
-  border-radius: 5px;
-  margin: 6px;
-  width: 25px;
-  height: 25px;
-  opacity: 0.5;
-  display: grid;
-  place-content: center;
 `;
 
 const Description = styled.h2``;
@@ -253,9 +241,7 @@ const ModalContainer = styled.div`
   width: 90%;
   max-width: 500px;
   z-index: 5;
-
-  background: rgba(102, 175, 243, 0.753);
-
+  background: rgba(132, 168, 201, 0.808);
   padding: 5px 10px 10px 10px;
   border-radius: 6px;
   display: ${({ gameInfo }) => (gameInfo ? "block" : "flex")};
@@ -299,3 +285,5 @@ const View = styled.button`
     font-size: 16px;
   }
 `;
+
+export default MapDetails;

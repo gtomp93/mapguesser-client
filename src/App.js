@@ -19,6 +19,7 @@ import { UserContext } from "./UserContext";
 import AddNameModal from "./AddNameModal";
 import ActiveGames from "./Profile/ActiveGames";
 import GameMap from "./Game";
+import MapDetails from "./MapDetails";
 
 function App() {
   const { status } = useContext(UserContext);
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/explore" element={<Explore />}>
             <Route path="/explore/game/:id" element={<GameModal />} />
           </Route>
+          <Route path={"/map/:id"} element={<MapDetails />} />
           <Route exact path="/gameOptions/:id" element={<GameOptions />} />
           <Route exact path="/map/:id" element={<GameMap />} />
 

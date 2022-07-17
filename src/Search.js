@@ -45,9 +45,9 @@ const Search = ({ showModal, setShowModal }) => {
           {suggestions.map((suggestion) => {
             return (
               <Suggestion
-                to={`/explore/game/${suggestion._id}`}
+                to={`/map/${suggestion._id}`}
                 onClick={() => {
-                  setShowModal(suggestion._id);
+                  // setShowModal(suggestion._id);
                   setSuggestions([]);
                   setInputValue("");
                 }}

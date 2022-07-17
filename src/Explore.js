@@ -64,7 +64,8 @@ const Explore = () => {
                       showModal={showModal}
                       setShowModal={setShowModal}
                       gameId={id}
-                      route="/explore"
+                      route={`/explore?page=${page}`}
+                      page={page}
                     />
                   );
                 })}
