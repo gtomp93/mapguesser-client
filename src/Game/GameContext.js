@@ -118,7 +118,7 @@ const initialGame = {
 };
 
 export const GameContextProvider = ({ children }) => {
-  const { currentUser, status, setStatus } = useContext(UserContext);
+  const { currentUser, setStatus } = useContext(UserContext);
   const [gameState, dispatch] = useReducer(gameReducer, initialGame);
   const [midpoint, setmidpoint] = useState(null);
   const [testPoint, setTestPoint] = useState(null);
@@ -126,7 +126,6 @@ export const GameContextProvider = ({ children }) => {
   const [opponent, setOpponent] = useState(null);
   const [timer, setTimer] = useState(60);
   const [countDown, setCountdown] = useState(6);
-
   const navigate = useNavigate();
   useEffect(() => {
     if (countDown < 1 && !currentUser) {

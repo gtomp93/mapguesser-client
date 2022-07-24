@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "./UserContext";
-import Game from "./Map";
 import Error from "./Error";
 import { Loading } from "./Loading";
 import Search from "./Search";
@@ -23,7 +22,7 @@ const Explore = () => {
     if (!id) {
       setShowModal(false);
     }
-  }, []);
+  }, [id, setShowModal]);
 
   useEffect(() => {
     fetch(`https://mapguesser-server.herokuapp.com/api/getGames?page=${page}`)

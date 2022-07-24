@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { GameContext } from "./GameContext";
 import styled, { css } from "styled-components";
-import { BsArrowsFullscreen } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   GoogleMap,
@@ -644,21 +643,5 @@ const MapWrapper = styled.a`
     display: ${(props) => (!props.hide || props.guessed ? "block" : "none")};
     width: ${(props) => (props.guessed || props.expand ? "100%" : "38%")};
     height: ${(props) => (props.guessed || props.expand ? "100%" : "36%")};
-  }
-`;
-
-const StyledButton = styled.button`
-  background-color: rgba(0, 0, 0, 0.87);
-  margin-top: 4px;
-  border: none;
-  border-radius: 4px;
-  color: #5a7bb0;
-  box-shadow: 0 0 10px rgb(255 255 255 / 10%);
-  font-weight: bold;
-  padding: 3px 7px 4px;
-  font-size: 22px;
-  &:disabled {
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: none;
   }
 `;

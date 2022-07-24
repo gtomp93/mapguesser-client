@@ -8,7 +8,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Error = () => {
   const { setStatus, status } = useContext(UserContext);
-  const { loginWithRedirect } = useAuth0();
   return ReactDOM.createPortal(
     <Container>
       <Message>

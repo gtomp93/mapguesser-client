@@ -19,7 +19,7 @@ export default function GameModal() {
   const [updatePage, setUpdatePage] = useState(false);
   const [liked, setLiked, numLikes, setNumLikes, game, route] =
     useOutletContext();
-  const { setShowModal, showModal } = useContext(ModalContext);
+  const { setShowModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const likeGame = async () => {
     if (!currentUser) {
@@ -150,6 +150,8 @@ export default function GameModal() {
                   return (
                     <Comment key={Math.random() * 999999} comment={comment} />
                   );
+                } else {
+                  return <></>;
                 }
               })}
               <CreateComment>
@@ -255,7 +257,12 @@ const ModalContainer = styled.div`
   z-index: 5;
 
   background: rgba(102, 175, 243, 0.753);
-
+  background: rgb(102, 175, 243);
+  background: linear-gradient(
+    225deg,
+    rgba(102, 175, 243, 0.7962535355939251) 0%,
+    rgba(255, 255, 255, 0.7234244039412641) 100%
+  );
   padding: 5px 10px 10px 10px;
   border-radius: 6px;
   display: ${({ gameInfo }) => (gameInfo ? "block" : "flex")};
@@ -286,12 +293,12 @@ const Submit = styled.button`
 
 const View = styled.button`
   all: unset;
-  color: #e8e6df;
+  color: #2b2b2b;
   background-color: none;
   background: none;
   border: none;
   font-size: 14px;
-
+  font-weight: bolder;
   &:hover {
     cursor: pointer;
   }

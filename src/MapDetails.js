@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BiX } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import ActionBar from "./ActionBar";
@@ -21,7 +20,6 @@ const MapDetails = () => {
     currentUser ? currentUser.likes.includes(id) : false
   );
   const [numLikes, setNumLikes] = useState(0);
-  const navigate = useNavigate();
   const likeGame = async () => {
     if (!currentUser) {
       setStatus({ error: "like" });
@@ -242,6 +240,12 @@ const ModalContainer = styled.div`
   max-width: 500px;
   z-index: 5;
   background: rgba(132, 168, 201, 0.808);
+  background: rgb(102, 175, 243);
+  background: linear-gradient(
+    225deg,
+    rgba(102, 175, 243, 0.7962535355939251) 50%,
+    rgba(255, 255, 255, 0.7234244039412641) 100%
+  );
   padding: 5px 10px 10px 10px;
   border-radius: 6px;
   display: ${({ gameInfo }) => (gameInfo ? "block" : "flex")};
@@ -273,6 +277,8 @@ const Submit = styled.button`
 const View = styled.button`
   all: unset;
   color: #e8e6df;
+  color: #2b2b2b;
+  font-weight: bolder;
   background-color: none;
   background: none;
   border: none;

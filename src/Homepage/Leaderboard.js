@@ -14,24 +14,27 @@ const Leaderboard = ({ users }) => {
         </SubTitle>
         <ScrollContainer>
           <StyledTable>
-            <Row>
-              <Heading></Heading>
+            <thead>
+              <Row>
+                <Heading></Heading>
 
-              <Heading>Name</Heading>
-              <Heading>Score</Heading>
-            </Row>
+                <Heading>Name</Heading>
+                <Heading>Score</Heading>
+              </Row>
+            </thead>
             {users?.map((user) => {
               return (
-                <Row key={user._id}>
-                  <Pic>
-                    {" "}
-                    <ProfPic src={user.picture} />
-                  </Pic>
-                  <Name>{user.givenName + " " + user.lastName}</Name>
-                  <Name>{user.score}</Name>
-                </Row>
+                <tbody key={user._id}>
+                  <Row>
+                    <Pic>
+                      <ProfPic src={user.picture} />
+                    </Pic>
+                    <Name>{user.givenName + " " + user.lastName}</Name>
+                    <Name>{user.score}</Name>
+                  </Row>
+                </tbody>
               );
-            })}{" "}
+            })}
           </StyledTable>
         </ScrollContainer>
       </StyledContainer>

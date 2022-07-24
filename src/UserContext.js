@@ -4,11 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
-  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [currentUser, setCurrentUser] = useState(null);
   const [status, setStatus] = useState(null);
-  const [loggedOut, setLoggedOut] = useState(null);
   const [reloadUser, setReloadUser] = useState(false);
+  console.log(currentUser);
 
   useEffect(() => {
     // loginWithRedirect();
@@ -101,7 +101,6 @@ export const UserContextProvider = ({ children }) => {
         setStatus,
         isAuthenticated,
         isLoading,
-        loggedOut,
       }}
     >
       {children}
