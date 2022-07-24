@@ -136,7 +136,6 @@ const GamePic = styled.img`
 const Name = styled.h2`
   font-size: 30px;
   padding: 0;
-
   color: ${({ type }) => (type === "profile" ? "#0e0091" : "#b103fc")};
   text-shadow: ${({ type }) =>
     type === "profile"

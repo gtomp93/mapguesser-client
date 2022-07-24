@@ -50,7 +50,7 @@ const GameOptions = () => {
         if (playerMode === "single") {
           navigate(`/map/${gameId}`);
         } else {
-          setGameLink(`http://localhost:3000/map/${gameId}`);
+          setGameLink(`https://mapguesser-client.herokuapp.com/map/${gameId}`);
           setNewGameId(gameId);
           return gameId;
         }
