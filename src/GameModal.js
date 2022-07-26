@@ -16,11 +16,13 @@ export default function GameModal() {
   const [viewMore, setViewMore] = useState(false);
   const { id } = useParams();
   const [gameInfo, setGameInfo] = useState(null);
-  const [updatePage, setUpdatePage] = useState(false);
   const [liked, setLiked, numLikes, setNumLikes, game, route] =
     useOutletContext();
   const { setShowModal } = useContext(ModalContext);
   const navigate = useNavigate();
+
+  console.log(gameInfo);
+  console.log(currentUser);
   const likeGame = async () => {
     if (!currentUser) {
       setStatus({ error: "like" });
@@ -70,8 +72,10 @@ export default function GameModal() {
       ev.stopPropagation();
       return;
     }
+    ev.stopPropagation();
 
-    await fetch(
+    console.log("here");
+    fetch(
       `https://mapguesser-server.herokuapp.com/api/comment/${gameInfo._id}`,
       {
         method: "PUT",
@@ -86,10 +90,18 @@ export default function GameModal() {
       }
     )
       .then((res) => {
-        res.json();
+        console.log("there");
+
+        return res.json();
       })
       .then((res) => {
-        setUpdatePage(!updatePage);
+        setGameInfo({
+          ...gameInfo,
+          comments: [
+            ...gameInfo.comments,
+            { comment, commentBy: currentUser._id, pic: currentUser.picture },
+          ],
+        });
       });
   };
   useEffect(() => {
@@ -129,52 +141,56 @@ export default function GameModal() {
               game={gameInfo}
               liked={liked}
               setLiked={setLiked}
-            />
+            />{" "}
+            {gameInfo.comments.length > 2 && (
+              <View
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setViewMore(!viewMore);
+                }}
+              >
+                {viewMore ? "View Less Comments" : "View More Comments"}
+              </View>
+            )}
             <CommentsSection>
-              {gameInfo.comments.length > 2 && (
-                <View
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setViewMore(!viewMore);
-                  }}
-                >
-                  {viewMore ? "View Less Comments" : "View More Comments"}
-                </View>
-              )}
-              {gameInfo.comments.map((comment, index) => {
-                if (index >= gameInfo.comments.length - 2 && !viewMore) {
-                  return (
-                    <Comment key={Math.random() * 999999} comment={comment} />
-                  );
-                } else if (viewMore) {
-                  return (
-                    <Comment key={Math.random() * 999999} comment={comment} />
-                  );
-                } else {
-                  return <></>;
-                }
-              })}
-              <CreateComment>
-                <CommentInput
-                  placeholder="comment"
-                  onClick={(e) => e.stopPropagation()}
-                  onChange={(ev) => {
-                    setComment(ev.target.value);
-                    setInputValue(ev.target.value);
-                  }}
-                  value={inputValue}
-                ></CommentInput>
-                <Submit
-                  onClick={(ev) => {
-                    ev.stopPropagation();
-                    submitComment(comment, ev);
-                    setInputValue("");
-                  }}
-                >
-                  Comment
-                </Submit>
-              </CreateComment>
-            </CommentsSection>{" "}
+              <CommentsContainer>
+                {gameInfo.comments.map((comment, index) => {
+                  if (index >= gameInfo.comments.length - 2 && !viewMore) {
+                    return (
+                      <Comment key={Math.random() * 999999} comment={comment} />
+                    );
+                  } else if (viewMore) {
+                    return (
+                      <Comment key={Math.random() * 999999} comment={comment} />
+                    );
+                  } else {
+                    return <></>;
+                  }
+                })}
+              </CommentsContainer>{" "}
+            </CommentsSection>
+            <CreateComment>
+              <CommentInput
+                placeholder="comment"
+                onClick={(e) => e.stopPropagation()}
+                onChange={(ev) => {
+                  ev.stopPropagation();
+                  setComment(ev.target.value);
+                  setInputValue(ev.target.value);
+                }}
+                value={inputValue}
+              ></CommentInput>
+              <Submit
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  submitComment(comment, ev);
+                  setInputValue("");
+                }}
+                disabled={!inputValue.length}
+              >
+                Comment
+              </Submit>
+            </CreateComment>{" "}
           </>
         ) : (
           <div>
@@ -207,6 +223,7 @@ const Overlay = styled.div`
 
 const Title = styled.h1`
   margin: 0;
+  flex: 0;
 `;
 
 const CloseModal = styled.button`
@@ -223,20 +240,48 @@ const CloseModal = styled.button`
   place-content: center;
 `;
 
-const Description = styled.h2``;
+const Description = styled.h2`
+  flex: 0;
+`;
 
-const Creator = styled.p``;
+const Creator = styled.p`
+  flex: 0;
+`;
 
 const MapImage = styled.img`
   width: 100%;
   max-height: 300px;
   object-fit: cover;
+  flex: 0;
+`;
+
+const CommentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
 `;
 
 const CommentsSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    background: rgba(250, 250, 250, 0.4);
+    width: 15px;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 15px;
+    background: rgba(157, 156, 156, 0.7);
+    border-radius: 8px;
+  }
 `;
 
 const CreateComment = styled.div`
@@ -248,16 +293,18 @@ const CreateComment = styled.div`
 
 const ModalContainer = styled.div`
   position: fixed;
-  max-height: ${({ gameInfo }) => (gameInfo ? "90%" : "50%")};
+  /* height: 90%; */
+  max-height: ${({ gameInfo }) => (gameInfo ? "80%" : "50%")};
+  /* height: calc(92vh - 44px); */
+  @media (max-width: 500px) {
+    max-height: 70%;
+  }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 500px;
   z-index: 5;
-
-  background: rgba(102, 175, 243, 0.753);
-  background: rgb(102, 175, 243);
   background: linear-gradient(
     225deg,
     rgba(102, 175, 243, 0.7962535355939251) 0%,
@@ -265,7 +312,8 @@ const ModalContainer = styled.div`
   );
   padding: 5px 10px 10px 10px;
   border-radius: 6px;
-  display: ${({ gameInfo }) => (gameInfo ? "block" : "flex")};
+  display: ${({ gameInfo }) => (gameInfo ? "flex" : "block")};
+  flex-direction: column;
   justify-content: center;
 `;
 

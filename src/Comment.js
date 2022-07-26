@@ -18,6 +18,8 @@ const CommentBubble = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  /* min-height: 0px; */
 `;
 
 const CommentText = styled.div`
@@ -25,20 +27,21 @@ const CommentText = styled.div`
   background: #e8e6df;
   border: solid lightGrey 1px;
   border-radius: 8px;
-  padding: 1px 10px 1px;
+  padding: 1px 10px 3px;
   margin-left: 3px;
   /* flex-wrap: wrap; */
 
   @media (min-width: 650px) {
-    height: 22px;
+    height: 24px;
     padding-top: 2px;
+    padding-bottom: 3px;
   }
 `;
 
 const Container = styled.div`
   width: 100%;
   display: flex;
-  height: 6%;
+  /* height: 6%; */
   margin-top: 4px;
   /* margin-left: 10px; */
 `;

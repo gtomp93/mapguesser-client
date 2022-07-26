@@ -127,6 +127,7 @@ export const GameContextProvider = ({ children }) => {
   const [timer, setTimer] = useState(60);
   const [countDown, setCountdown] = useState(6);
   const navigate = useNavigate();
+  console.log({ gameState });
   useEffect(() => {
     if (countDown < 1 && !currentUser) {
       setStatus({ error: "play" });
