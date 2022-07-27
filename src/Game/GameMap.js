@@ -22,6 +22,7 @@ const options = {
   fullscreenControl: false,
   streetViewControl: false,
   mapTypeControl: false,
+  clickableIcons: false,
 };
 
 const streetViewOptions = {
