@@ -51,9 +51,9 @@ const MapMaker = () => {
         </Info>
         <MapInput dispatch={dispatch} />
         <ListContainer>
-          {!mapState.addresses[0] && (
+          {/* {!mapState.addresses[0] && (
             <div>Your added locations will appear here</div>
-          )}
+          )} */}
           {mapState.addresses.map((address, index) => {
             return (
               <div style={{ border: "1px solid black" }}>
