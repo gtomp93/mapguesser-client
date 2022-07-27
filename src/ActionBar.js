@@ -14,10 +14,11 @@ const ActionBar = ({
   type,
   featured,
 }) => {
+  console.log({ type });
   const { currentUser, setStatus } = useContext(UserContext);
   const { setShowModal } = useContext(ModalContext);
   return (
-    <ActionBarContainer featured={featured}>
+    <ActionBarContainer featured={featured} type={type}>
       <LikeBox>
         <LikeButton
           onClick={(ev) => {
@@ -30,14 +31,18 @@ const ActionBar = ({
             style={
               liked
                 ? { fill: "red", color: "black" }
-                : type === "profile"
+                : type === "profile" || type === "featured"
                 ? { fill: "none", color: "black" }
                 : { fill: "none", color: "white" }
             }
           />
         </LikeButton>
         <Likes
-          style={type === "profile" ? { color: "black" } : { fill: "#d3d2d9" }}
+          style={
+            type === "profile" || type === "featured"
+              ? { color: "black" }
+              : { fill: "#d3d2d9" }
+          }
         >
           {numLikes ? numLikes : null}
         </Likes>{" "}
@@ -45,10 +50,18 @@ const ActionBar = ({
       <CommentBox>
         <FiMessageCircle
           size="22px"
-          style={type === "profile" ? { color: "black" } : { fill: "#d3d2d9" }}
+          style={
+            type === "profile" || type === "featured"
+              ? { color: "black" }
+              : { fill: "#d3d2d9" }
+          }
         />
         <NumComments
-          style={type === "profile" ? { color: "black" } : { fill: "#d3d2d9" }}
+          style={
+            type === "profile" || type === "featured"
+              ? { color: "black" }
+              : { fill: "#d3d2d9" }
+          }
         >
           {game.comments
             ? game.comments.length
@@ -73,14 +86,18 @@ const ActionBar = ({
       >
         <FiPlay
           style={
-            type === "profile"
+            type === "profile" || type === "featured"
               ? { color: "black", fill: "green" }
               : { color: "white", fill: "green" }
           }
           size="22px"
         />
         <Play
-          style={type === "profile" ? { color: "black" } : { color: "white" }}
+          style={
+            type === "profile" || type === "featured"
+              ? { color: "black" }
+              : { color: "white" }
+          }
         >
           Play
         </Play>
@@ -132,7 +149,12 @@ const Likes = styled.span`
 const ActionBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: ${({ featured }) => (featured ? "4px" : "10px")};
+  margin-top: ${({ type }) => (type ? "0px" : "10px")};
+  padding: ${({ type }) => (type ? "6px 6px 2px" : "0")};
+
+  background: ${({ type }) =>
+    type === "featured" ? "rgba(255, 255, 255, 0.459)" : "none"};
+  border-radius: ${({ type }) => (type === "featured" ? "5px" : "0")};
 `;
 
 export default ActionBar;

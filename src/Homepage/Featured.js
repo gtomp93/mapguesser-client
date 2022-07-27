@@ -38,7 +38,7 @@ const StyledContainer = styled(Container)`
   justify-content: flex-start;
 
   max-height: 100%;
-  padding-bottom: 0;
+  padding-bottom: 10px;
 `;
 
 const StyledWrapper = styled.div`

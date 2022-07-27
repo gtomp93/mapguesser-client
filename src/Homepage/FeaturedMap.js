@@ -72,8 +72,9 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
       <Picture src={game.pic} />
       <ActionBar
         game={game}
-        type="profile"
+        type="featured"
         likeGame={likeGame}
+        liked={liked}
         featured={true}
       />
       {game._id === showModal || game._id === gameId ? (
