@@ -34,17 +34,17 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   width: fit-content;
   max-width: 95vw;
-  padding: 12px;
+  padding: 20px;
   font-weight: bold;
   transform: translate(-50%, -50%);
   z-index: 100;
-  background-color: rgba(247, 45, 42, 0.75);
+  background-color: rgba(247, 45, 42, 0.77);
 `;
 
 const Message = styled.p`
-  font-size: 18px;
+  font-size: 24px;
   @media (min-width: 800px) {
-    font-size: 24px;
+    font-size: 28px;
   }
 `;
 
