@@ -69,7 +69,7 @@ const AddNameModal = () => {
               />
             </label>
           </div>
-          <input type="submit" />
+          <input style={{ fontSize: "20px", padding: "5px" }} type="submit" />
         </form>
       </Container>
     </Overlay>
@@ -89,11 +89,20 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
-  padding: 10px;
-  width: 300px;
+  padding: 30px;
+  min-width: 300px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(5, 205, 255, 0.753);
+  background: linear-gradient(
+    225deg,
+    rgba(102, 175, 243, 0.7962535355939251) 0%,
+    rgba(255, 255, 255, 0.7234244039412641) 100%
+  );
+  div {
+    margin: 10px 0 10px;
+    font-size: 20px;
+  }
 `;
