@@ -109,8 +109,8 @@ const ListContainer = styled.div`
 `;
 
 const BackgroundContainer = styled.div`
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1228111945.jpg");
-  background-size: cover;
+  /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_1228111945.jpg");
+  background-size: cover; */
   width: 100%;
   min-height: calc(100vh - 44px);
   display: grid;

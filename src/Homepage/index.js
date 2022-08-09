@@ -89,7 +89,7 @@ const Container = styled.div`
   height: ${({ users, maps }) => (users && maps ? "100%" : "100vh")};
   background-size: cover;
   /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg"); */
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/cropped+HK+pic.jpg");
+  /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/cropped+HK+pic.jpg"); */
   justify-content: space-around;
   a {
     color: black;
@@ -98,8 +98,11 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  color: white;
-  font-size: 30px;
+  /* color: black; */
+  color: rgba(0, 0, 0, 0.87);
+  color: darkblue;
+
+  font-size: 36px;
   text-align: center;
   font-weight: 800;
   @media (min-width: 500px) {

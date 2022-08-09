@@ -136,11 +136,12 @@ const GamePic = styled.img`
 const Name = styled.h2`
   font-size: 30px;
   padding: 0;
-  color: ${({ type }) => (type === "profile" ? "#0e0091" : "#b103fc")};
+  color: ${({ type }) => (type === "profile" ? "#0e0091" : "#608abb")};
+
   text-shadow: ${({ type }) =>
     type === "profile"
       ? "2px 2px 15px rgba(83, 55, 206, 0.86)"
-      : "2px 2px 15px rgba(206, 89, 55, 0.86)"};
+      : "1px 1px 8px #7bb2f081"};
   @media (min-width: 769px) {
     font-size: 30px;
     margin: 0 0 5px;

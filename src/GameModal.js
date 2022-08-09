@@ -253,6 +253,7 @@ const MapImage = styled.img`
   max-height: 300px;
   object-fit: cover;
   flex: 0;
+  min-height: 0;
 `;
 
 const CommentsContainer = styled.div`
@@ -282,6 +283,7 @@ const CommentsSection = styled.div`
     background: rgba(157, 156, 156, 0.7);
     border-radius: 8px;
   }
+  min-height: 45px;
 `;
 
 const CreateComment = styled.div`
@@ -297,7 +299,7 @@ const ModalContainer = styled.div`
   max-height: ${({ gameInfo }) => (gameInfo ? "80%" : "50%")};
   /* height: calc(92vh - 44px); */
   @media (max-width: 500px) {
-    max-height: 70%;
+    max-height: 80%;
   }
   top: 50%;
   left: 50%;

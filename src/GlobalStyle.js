@@ -39,6 +39,8 @@ justify-content:center  ;
   margin-top:44px;
 position: relative ;
 z-index: 1 ;
+background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/cropped+HK+pic.jpg");
+background-size:cover;
 }
   button{
     cursor: pointer;
