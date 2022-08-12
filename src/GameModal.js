@@ -296,7 +296,7 @@ const CreateComment = styled.div`
 const ModalContainer = styled.div`
   position: fixed;
   /* height: 90%; */
-  max-height: ${({ gameInfo }) => (gameInfo ? "90%" : "50%")};
+  max-height: ${({ gameInfo }) => (gameInfo ? "85%" : "50%")};
   /* height: calc(92vh - 44px); */
   @media (max-width: 500px) {
     max-height: 80%;
