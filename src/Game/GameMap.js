@@ -542,13 +542,19 @@ const GuessMap = styled(GoogleMap)`
 `;
 
 const PageContainer = styled.div`
+  background: linear-gradient(
+    90deg,
+    rgba(23, 56, 156, 1) 0%,
+    rgba(24, 30, 87, 1) 150%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 90vh;
+  height: calc(100vh - 44px);
   overflow: auto;
+  padding: 20px;
 `;
 
 const BigWrapper = styled.div`
