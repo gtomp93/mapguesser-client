@@ -110,6 +110,7 @@ const LikeBox = styled.div`
   display: flex;
   align-items: center;
   color: white;
+  width: 28px;
 `;
 
 const CommentBox = styled.div`
