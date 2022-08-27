@@ -13,7 +13,6 @@ const CreatedMaps = () => {
             if (game) {
               let isLiked = currentUser.likes.includes(game._id);
               return (
-                // <div style={{ display: "flex", flexDirection: "column" }}>
                 <Game
                   key={Math.random() * 9999}
                   game={game}
@@ -31,9 +30,9 @@ const CreatedMaps = () => {
         <Message>
           You haven't{" "}
           <Link to="/CreateMapForm" style={{ color: "lightskyblue" }}>
-            created any games
+            created any Maps
           </Link>{" "}
-          yet. Try refreshing if you don't see recently created games
+          yet 😢.
         </Message>
       )}
     </>
@@ -43,9 +42,7 @@ const CreatedMaps = () => {
 export default CreatedMaps;
 
 const GamesContainer = styled.div`
-  /* display: ${(props) => (props.created ? "block" : "none")}; */
-  /* margin: 30px auto; */
-  width: calc(100% - 40px);
+  max-width: calc(100% - 40px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;

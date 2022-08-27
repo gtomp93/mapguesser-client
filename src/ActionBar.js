@@ -14,9 +14,9 @@ const ActionBar = ({
   type,
   featured,
 }) => {
-  console.log({ type });
   const { currentUser, setStatus } = useContext(UserContext);
   const { setShowModal } = useContext(ModalContext);
+  console.log(type);
   return (
     <ActionBarContainer featured={featured} type={type}>
       <LikeBox>
@@ -150,11 +150,11 @@ const ActionBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: ${({ type }) => (type ? "0px" : "10px")};
-  padding: ${({ type }) => (type ? "6px 6px 2px" : "0")};
+  padding: ${({ type }) => (type ? "6px 6px 0px" : "0")};
 
   background: ${({ type }) =>
     type === "featured" ? "rgba(255, 255, 255, 0.459)" : "none"};
-  border-radius: ${({ type }) => (type === "featured" ? "5px" : "0")};
+  border-radius: ${({ type }) => (type === "featured" ? "0 0 5px 5px" : "0")};
 `;
 
 export default ActionBar;

@@ -28,10 +28,7 @@ const LikedMaps = () => {
           })}
         </GamesContainer>
       ) : (
-        <Message>
-          You haven't liked any maps yet 😢. Try refreshing if you don't see
-          recently liked games
-        </Message>
+        <Message>You haven't liked any maps yet 😢.</Message>
       )}
     </>
   );
@@ -40,11 +37,12 @@ const LikedMaps = () => {
 export default LikedMaps;
 
 const GamesContainer = styled.div`
-  /* display: ${(props) => (props.created ? "block" : "none")}; */
-  /* margin: 30px auto; */
-  width: calc(100% - 40px);
+  max-width: calc(100% - 40px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  @media (max-width: 330px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
   gap: 32px;
   margin: 15px 0 20px;
   color: black;

@@ -61,11 +61,8 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
           setShowModal(game._id);
         }
         ev.stopPropagation();
-        // navigate(`/game/${game._id}`);
-        // setShowModal(game._id);
       }}
     >
-      {/* <Wrapper> */}
       <Title>{game.name}</Title>
       <Description>{game.description}</Description>
       <Author> Created by {game.creator}</Author>
@@ -107,12 +104,10 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-  padding-bottom: 2px;
+  padding: 0 9px 2px;
   min-height: 0;
-
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px 5px 0 0px;
-  /* color: #155a08; */
   color: #1256d4;
   font-size: 30px;
   @media (max-width: 1240px) {
@@ -120,13 +115,9 @@ const Title = styled.h2`
   }
 `;
 const Description = styled.h3`
-  padding-bottom: 2px;
+  padding: 0 9px 2px;
   min-height: 0;
-
-  /* background-color: rgba(47, 90, 233, 0.25); */
-  /* background-color: rgba(98, 88, 241, 0.15); */
   background-color: rgba(255, 255, 255, 0.5);
-
   font-size: 20px;
   @media (max-width: 1414px) {
     font-size: 20px;
@@ -134,7 +125,7 @@ const Description = styled.h3`
 `;
 const Author = styled.p`
   min-height: 0;
-  /* height: 100%; */
+  padding: 0 9px 2px;
   padding-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.5);
   font-size: 20px;
@@ -146,8 +137,8 @@ const Author = styled.p`
 const Picture = styled.img`
   width: 100%;
   min-height: 0;
-  /* height: calc(100% - 140px); */
-  /* height: 100%; */
+  padding: 0 9px;
+  background-color: rgba(255, 255, 255, 0.5);
   flex: 1;
   object-fit: cover;
 `;

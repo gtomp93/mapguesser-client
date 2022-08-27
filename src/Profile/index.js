@@ -10,7 +10,7 @@ import { ModalContext } from "../ModalContext";
 
 const Profile = () => {
   const { isAuthenticated } = useAuth0();
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, reloadUser, setReloadUser } = useContext(UserContext);
   const [games, setGames] = useState({});
   const { setShowModal } = useContext(ModalContext);
   const { logout } = useAuth0();
@@ -20,6 +20,11 @@ const Profile = () => {
     textDecoration: "none",
     color: "#9897a1",
   };
+
+  useEffect(() => {
+    setReloadUser(!reloadUser);
+  }, []);
+
   useEffect(async () => {
     let isCancelled = false;
 

@@ -21,8 +21,6 @@ export default function GameModal() {
   const { setShowModal } = useContext(ModalContext);
   const navigate = useNavigate();
 
-  console.log(gameInfo);
-  console.log(currentUser);
   const likeGame = async () => {
     if (!currentUser) {
       setStatus({ error: "like" });
@@ -74,7 +72,6 @@ export default function GameModal() {
     }
     ev.stopPropagation();
 
-    console.log("here");
     fetch(
       `https://mapguesser-server.herokuapp.com/api/comment/${gameInfo._id}`,
       {
@@ -90,8 +87,6 @@ export default function GameModal() {
       }
     )
       .then((res) => {
-        console.log("there");
-
         return res.json();
       })
       .then((res) => {
