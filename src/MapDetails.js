@@ -88,7 +88,14 @@ const MapDetails = () => {
         res.json();
       })
       .then((res) => {
-        setUpdatePage(!updatePage);
+        // setUpdatePage(!updatePage);
+        setGameInfo({
+          ...gameInfo,
+          comments: [
+            ...gameInfo.comments,
+            { comment, commentBy: currentUser._id, pic: currentUser.picture },
+          ],
+        });
       });
   };
   useEffect(() => {

@@ -8,7 +8,6 @@ export const UserContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [status, setStatus] = useState(null);
   const [reloadUser, setReloadUser] = useState(false);
-  console.log(currentUser);
 
   useEffect(() => {
     // loginWithRedirect();
