@@ -73,6 +73,7 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
         likeGame={likeGame}
         liked={liked}
         featured={true}
+        numLikes={numLikes}
       />
       {game._id === showModal || game._id === gameId ? (
         <Outlet
