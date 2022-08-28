@@ -36,7 +36,8 @@ export default Featured;
 
 const StyledContainer = styled(Container)`
   justify-content: flex-start;
-
+  padding-left: 15px;
+  padding-right: 15px;
   max-height: 100%;
   padding-bottom: 10px;
 `;
