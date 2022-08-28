@@ -263,17 +263,17 @@ const Background = styled.img`
 
   @media (min-width: 1906px) and (max-height: 1044px) {
     top: -800px;
-    height: 70%;
+    height: 71%;
   }
 
   @media (min-width: 1906px) and (max-height: 850px) {
     top: -700px;
-    height: 68%;
+    height: 68.3%;
   }
 
   @media (min-width: 1906px) and (min-height: 1336px) {
     top: -1400px;
-    height: 84.9%;
+    height: 85%;
   }
 `;
 
