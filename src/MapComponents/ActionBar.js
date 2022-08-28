@@ -16,7 +16,6 @@ const ActionBar = ({
 }) => {
   const { currentUser, setStatus } = useContext(UserContext);
   const { setShowModal } = useContext(ModalContext);
-  console.log(type);
   return (
     <ActionBarContainer featured={featured} type={type}>
       <LikeBox>

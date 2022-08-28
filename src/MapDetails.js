@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ActionBar from "./MapComponents/ActionBar";
 import Comment from "./Comment";
@@ -15,7 +15,6 @@ const MapDetails = () => {
   const [inputValue, setInputValue] = useState("");
   const [viewMore, setViewMore] = useState(false);
   const [gameInfo, setGameInfo] = useState(null);
-  const [updatePage, setUpdatePage] = useState(false);
   const [liked, setLiked] = useState(
     currentUser ? currentUser.likes.includes(id) : false
   );

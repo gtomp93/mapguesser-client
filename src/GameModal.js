@@ -151,15 +151,11 @@ export default function GameModal() {
               <CommentsContainer>
                 {gameInfo.comments.map((comment, index) => {
                   if (index >= gameInfo.comments.length - 2 && !viewMore) {
-                    return (
-                      <Comment key={Math.random() * 999999} comment={comment} />
-                    );
+                    return <Comment key={index} comment={comment} />;
                   } else if (viewMore) {
-                    return (
-                      <Comment key={Math.random() * 999999} comment={comment} />
-                    );
+                    return <Comment key={index} comment={comment} />;
                   } else {
-                    return <></>;
+                    return <React.Fragment></React.Fragment>;
                   }
                 })}
               </CommentsContainer>{" "}
