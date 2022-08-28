@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 import { BiX } from "react-icons/bi";
 import LoginButton from "./LoginButton";
 import { useAuth0 } from "@auth0/auth0-react";

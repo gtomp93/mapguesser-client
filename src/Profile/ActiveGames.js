@@ -1,10 +1,9 @@
 import { format } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import { BiGlobe } from "react-icons/bi";
-import { FiGlobe } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 const ActiveGames = () => {
   const { currentUser } = useContext(UserContext);

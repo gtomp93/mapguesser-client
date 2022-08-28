@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 
 const AddNameModal = () => {
   const [name, setName] = useState({});

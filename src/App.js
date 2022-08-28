@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 import Homepage from "./Homepage";
-import CreateMapForm from "./CreateMapForm";
+import CreateMapForm from "./MapCreatorComponents/CreateMapForm";
 import Login from "./Login";
 import Logout from "./Logout";
 import Header from "./Header";
-import GameOptions from "./GameOptions";
+import GameOptions from "./Game/GameOptions";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./Profile";
 import Explore from "./Explore";
 import GlobalStyle from "./GlobalStyle";
-import MapMaker from "./MapMaker";
+import MapMaker from "./MapCreatorComponents/MapMaker";
 import Confirmation from "./Confirmation";
 import GameModal from "./GameModal";
 import LikedMaps from "./Profile/LikedMaps";
 import CreatedMaps from "./Profile/CreatedMaps";
 
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 import AddNameModal from "./AddNameModal";
 import ActiveGames from "./Profile/ActiveGames";
 import GameMap from "./Game";

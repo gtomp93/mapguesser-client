@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import ActionBar from "./ActionBar";
+import ActionBar from "./MapComponents/ActionBar";
 import Comment from "./Comment";
 import Error from "./Error";
 import { Loading } from "./Loading";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 
 const MapDetails = () => {
   const { id } = useParams();

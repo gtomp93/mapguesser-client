@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import ActionBar from "./ActionBar";
 import { Outlet } from "react-router-dom";
-import { ModalContext } from "./ModalContext";
+import { ModalContext } from "../Contexts/ModalContext";
 
 const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
   const { showModal, setShowModal } = useContext(ModalContext);
@@ -63,10 +63,8 @@ const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
       type={type}
       index={index}
       onClick={() => {
-        // if (!showModal) {
         navigate(`game/${game._id}?page=${page}`);
         setShowModal(game._id);
-        // }
       }}
     >
       <Box>

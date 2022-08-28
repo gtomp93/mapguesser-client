@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 import Error from "./Error";
 import { Loading } from "./Loading";
 import Search from "./Search";
-import { ModalContext } from "./ModalContext";
-import Map from "./Map";
+import { ModalContext } from "./Contexts/ModalContext";
+import Map from "./MapComponents/Map";
 
 const Explore = () => {
   const { id } = useParams();
@@ -263,7 +263,7 @@ const Background = styled.img`
 
   @media (min-width: 1906px) and (max-height: 1044px) {
     top: -800px;
-    height: 71%;
+    height: 71.2%;
   }
 
   @media (min-width: 1906px) and (max-height: 850px) {

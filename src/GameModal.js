@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 import ReactDOM from "react-dom";
-import ActionBar from "./ActionBar";
+import ActionBar from "./MapComponents/ActionBar";
 import { BiX } from "react-icons/bi";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Loading } from "./Loading";
 import Error from "./Error";
-import { ModalContext } from "./ModalContext";
+import { ModalContext } from "./Contexts/ModalContext";
 export default function GameModal() {
   const [comment, setComment] = useState("");
   const { currentUser, status, setStatus } = useContext(UserContext);

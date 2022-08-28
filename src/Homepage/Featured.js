@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { Container, SubTitle } from "./styledComponents";
 import FeaturedMap from "./FeaturedMap";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import Map from "../Map";
+import Map from "../MapComponents/Map";
 import styled from "styled-components";
 
 const LikedMaps = () => {
@@ -24,6 +24,8 @@ const LikedMaps = () => {
                 />
                 // </div>
               );
+            } else {
+              return <></>;
             }
           })}
         </GamesContainer>

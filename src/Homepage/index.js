@@ -7,10 +7,10 @@ import CreateMap from "./CreateMap";
 import { Loading } from "../Loading";
 import Error from "../Error";
 import GlobeSpinner from "../Globe";
-import { ModalContext } from "../ModalContext";
+import { ModalContext } from "../Contexts/ModalContext";
 import ProfileLinks from "./ProfileLinks";
 import SignUp from "./SignUp";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { useParams } from "react-router-dom";
 
 const Homepage = () => {

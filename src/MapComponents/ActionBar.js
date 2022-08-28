@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { FiHeart, FiMessageCircle, FiPlay } from "react-icons/fi";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { UserContext } from "./UserContext";
-import { ModalContext } from "./ModalContext";
+import { UserContext } from "../Contexts/UserContext";
+import { ModalContext } from "../Contexts/ModalContext";
 
 const ActionBar = ({
   likeGame,

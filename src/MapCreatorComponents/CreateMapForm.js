@@ -1,4 +1,4 @@
-import { MapCreationContext } from "./MapCreationContext";
+import { MapCreationContext } from "../Contexts/MapCreationContext";
 import { Link } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import styled from "styled-components";

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { MapCreationContext } from "./MapCreationContext";
+import { MapCreationContext } from "./Contexts/MapCreationContext";
 
 const Confirmation = () => {
   const { confirmationDetails } = useContext(MapCreationContext);

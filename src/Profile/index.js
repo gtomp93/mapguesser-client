@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 import styled from "styled-components";
 import { Loading } from "../Loading";
 import { FiLogOut } from "react-icons/fi";
 import { Outlet, NavLink } from "react-router-dom";
-import { ModalContext } from "../ModalContext";
+import { ModalContext } from "../Contexts/ModalContext";
 
 const Profile = () => {
   const { isAuthenticated } = useAuth0();
@@ -25,41 +25,45 @@ const Profile = () => {
     setReloadUser(!reloadUser);
   }, []);
 
-  useEffect(async () => {
-    let isCancelled = false;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      let isCancelled = false;
 
-    if (currentUser) {
-      if (currentUser && !isCancelled) {
-        const gamesData = await fetch(
-          "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ games: currentUser.maps }),
-          }
-        );
-        const parsedGamesData = await gamesData.json();
+      if (currentUser) {
+        if (currentUser && !isCancelled) {
+          const gamesData = await fetch(
+            "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ games: currentUser.maps }),
+            }
+          );
+          const parsedGamesData = await gamesData.json();
 
-        const likesData = await fetch(
-          "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ games: currentUser.likes }),
-          }
-        );
+          const likesData = await fetch(
+            "https://mapguesser-server.herokuapp.com/api/getPlayerGames",
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ games: currentUser.likes }),
+            }
+          );
 
-        const parsedLikesData = await likesData.json();
-        setGames({
-          ...games,
-          created: parsedGamesData.data,
-          liked: parsedLikesData.data,
-        });
+          const parsedLikesData = await likesData.json();
+          setGames({
+            ...games,
+            created: parsedGamesData.data,
+            liked: parsedLikesData.data,
+          });
+        }
       }
-    }
-    return () => {
-      setShowModal(false);
+      return () => {
+        setShowModal(false);
+      };
     };
+
+    fetchUserData();
   }, [currentUser]);
 
   const deleteGame = async (_id) => {

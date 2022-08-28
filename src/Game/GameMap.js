@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { GameContext } from "./GameContext";
 import styled, { css } from "styled-components";
 import { useParams } from "react-router-dom";

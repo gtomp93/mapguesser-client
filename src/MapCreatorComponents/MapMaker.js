@@ -10,7 +10,7 @@ import {
   useLoadScript,
   StreetViewPanorama,
 } from "@react-google-maps/api";
-import { MapCreationContext } from "./MapCreationContext";
+import { MapCreationContext } from "../Contexts/MapCreationContext";
 
 const streetViewStyle = {
   width: "75%",

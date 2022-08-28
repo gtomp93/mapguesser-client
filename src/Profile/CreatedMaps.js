@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
-import Game from "../Map";
+import Game from "../MapComponents/Map";
 
 const CreatedMaps = () => {
   const [games, currentUser, deleteGame] = useOutletContext();

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ActionBar from "../ActionBar";
-import { ModalContext } from "../ModalContext";
-import { UserContext } from "../UserContext";
+import ActionBar from "../MapComponents/ActionBar";
+import { ModalContext } from "../Contexts/ModalContext";
+import { UserContext } from "../Contexts/UserContext";
 const FeaturedMap = ({ game, isLiked, gameId, route }) => {
   const { showModal, setShowModal } = useContext(ModalContext);
   const navigate = useNavigate();

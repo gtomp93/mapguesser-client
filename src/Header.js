@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import { FiUser } from "react-icons/fi";
 import { BiWorld, BiMap } from "react-icons/bi";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./Contexts/UserContext";
 
 const Header = () => {
   const { isAuthenticated } = useAuth0();

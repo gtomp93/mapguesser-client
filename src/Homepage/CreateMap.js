@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { Container } from "./styledComponents";
 import { SubTitle } from "./styledComponents";
 const CreateMap = () => {

@@ -4,7 +4,7 @@ import { FiUser, FiUsers } from "react-icons/fi";
 import { BiAlarm, BiAlarmOff } from "react-icons/bi";
 
 import styled from "styled-components";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../Contexts/UserContext";
 
 const GameOptions = () => {
   const { id } = useParams();

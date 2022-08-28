@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { calculateScore } from "./calculateScore";
 export const GameContext = createContext(null);
 

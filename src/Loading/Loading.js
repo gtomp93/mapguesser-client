@@ -1,10 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import Login from "../Login";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import { FiLoader } from "react-icons/fi";
-import { UserContext } from "../UserContext";
 
 export const Loading = () => {
   return <Wrapper speed={1000}></Wrapper>;

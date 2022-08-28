@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../Contexts/UserContext";
 import { GameContext } from "./GameContext";
 
 const GameSummary = () => {
   const {
-    gameState: { gameMode, gameScore, myGameData, otherPlayerData, playerMode },
+    gameState: { gameScore, myGameData, otherPlayerData, playerMode },
   } = useContext(GameContext);
   const { currentUser } = useContext(UserContext);
 

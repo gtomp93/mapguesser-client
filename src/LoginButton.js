@@ -7,7 +7,6 @@ const LoginButton = ({ children, errorLogin }) => {
   return (
     <Login errorLogin={errorLogin} onClick={() => loginWithRedirect()}>
       <LoginIcon />
-      {/* <LoginLabel>Log In</LoginLabel> */}
       <Label>{children}</Label>
     </Login>
   );
