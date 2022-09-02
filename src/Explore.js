@@ -40,7 +40,8 @@ const Explore = () => {
             <Error status={status} setStatus={setStatus} />
           )}
           {games?.length > 19 && (
-            <Background src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg" />
+            // <Background src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg" />
+            <Background src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/Full+Hong+Kong+Right+side+cropped.jpg" />
           )}
 
           {games ? (
