@@ -6,7 +6,8 @@ import Error from "./Error";
 import { Loading } from "./Loading";
 import Search from "./Search";
 import { ModalContext } from "./Contexts/ModalContext";
-import Map from "./MapComponents/Map";
+import Map from "./MapComponents";
+import Cloud from "./Homepage/Cloud";
 
 const Explore = () => {
   const { id } = useParams();
@@ -35,6 +36,7 @@ const Explore = () => {
   return (
     <>
       <Container full={games?.length > 19}>
+        {" "}
         <ParallaxWrapper>
           {status && status !== "noName" && (
             <Error status={status} setStatus={setStatus} />
@@ -46,11 +48,11 @@ const Explore = () => {
 
           {games ? (
             <GamesWrapper>
-              {" "}
               <TopWrapper>
                 <Title>Search Maps</Title>{" "}
                 <Search setShowModal={setShowModal} />
               </TopWrapper>
+              <Cloud />
               <GamesGrid>
                 {games.map((game) => {
                   let isLiked = currentUser?.likes.includes(game._id);
@@ -114,16 +116,22 @@ const Container = styled.div`
       https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg
     )`};
   background-size: cover;
+  position: relative;
+  z-index: 2;
 `;
 
 const GamesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 2;
 `;
 
 const GamesGrid = styled.div`
   display: grid;
+  position: relative;
+  z-index: 2;
+
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 1.6rem;
   margin: 25px 0px 0px;
@@ -145,15 +153,19 @@ const ParallaxWrapper = styled.div`
   align-items: center;
   width: 100%;
   transform-style: preserve-3d;
-  z-index: -1;
+  z-index: 1;
 `;
 
 const PageContainer = styled.div`
   text-align: center;
+  position: relative;
+
   margin-top: 8px;
   button {
     margin: 0 8px;
   }
+  position: relative;
+  z-index: 2;
 `;
 
 const Title = styled.h1`

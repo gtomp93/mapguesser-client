@@ -49,12 +49,16 @@ const Header = () => {
         )}
         {isAuthenticated && (
           <ProfileLink to="/profile">
-            <ProfileIcon size={"25px"} />
+            <ProfileIcon size={25} />
             <Nav>Profile</Nav>
           </ProfileLink>
         )}
 
-        {!isAuthenticated && <LoginButton>Log In</LoginButton>}
+        {!isAuthenticated && (
+          <LoginButton>
+            <Nav>Log In</Nav>
+          </LoginButton>
+        )}
       </HeaderContainer>
     </>
   );

@@ -6,7 +6,7 @@ const LoginButton = ({ children, errorLogin }) => {
   const { loginWithRedirect } = useAuth0();
   return (
     <Login errorLogin={errorLogin} onClick={() => loginWithRedirect()}>
-      <LoginIcon />
+      <LoginIcon size={25} />
       <Label>{children}</Label>
     </Login>
   );

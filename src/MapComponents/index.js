@@ -102,8 +102,8 @@ const GameContainer = styled.div`
   &:hover {
     transform: scale(1.01);
   }
-  @media (min-width: 700px) {
-  }
+  position: relative;
+  z-index: 2;
   border-radius: 7px 7px 7px 7px;
   background-color: ${({ type }) =>
     type === "profile" ? "rgb(255,255,255,.57)" : "rgb(0, 0, 0, 0.66)"};
@@ -119,6 +119,8 @@ const Box = styled.div`
   padding: 10px;
   @media (min-width: 700px) {
   }
+  position: relative;
+  z-index: 2;
 `;
 
 const GamePic = styled.img`

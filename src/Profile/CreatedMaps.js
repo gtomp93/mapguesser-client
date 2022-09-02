@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
-import Game from "../MapComponents/Map";
+import Map from "../MapComponents";
 
 const CreatedMaps = () => {
   const [games, currentUser, deleteGame] = useOutletContext();
@@ -13,7 +13,7 @@ const CreatedMaps = () => {
             if (game) {
               let isLiked = currentUser.likes.includes(game._id);
               return (
-                <Game
+                <Map
                   key={Math.random() * 9999}
                   game={game}
                   isLiked={isLiked}

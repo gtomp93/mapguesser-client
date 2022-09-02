@@ -12,6 +12,7 @@ import ProfileLinks from "./ProfileLinks";
 import SignUp from "./SignUp";
 import { UserContext } from "../Contexts/UserContext";
 import { useParams } from "react-router-dom";
+import Cloud from "./Cloud";
 
 const Homepage = () => {
   const { showModal, setShowModal } = useContext(ModalContext);
@@ -52,6 +53,7 @@ const Homepage = () => {
           <TopWrapper>
             <Title>MapGuesser</Title>
             <GlobeSpinner speed={10000} />
+            <Cloud />
           </TopWrapper>
           <Wrapper>
             <Section1>
@@ -85,7 +87,6 @@ const Homepage = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   height: ${({ users, maps }) => (users && maps ? "100%" : "100vh")};
   background-size: cover;
   /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg"); */
@@ -95,16 +96,19 @@ const Container = styled.div`
     color: black;
     text-decoration: none;
   }
+  position: relative;
 `;
 
 const Title = styled.h1`
-  /* color: black; */
-  color: rgba(0, 0, 0, 0.87);
   color: darkblue;
-
-  font-size: 36px;
+  position: relative;
+  z-index: 9;
+  font-size: 38px;
   text-align: center;
   font-weight: 800;
+  @media (min-width: 350px) {
+    font-size: 44px;
+  }
   @media (min-width: 500px) {
     font-size: 60px;
   }

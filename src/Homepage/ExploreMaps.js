@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { SubTitle } from "./styledComponents";
 import { Container } from "./styledComponents";
 import { MdExplore } from "react-icons/md";
+import { animated, useSpring } from "react-spring";
 const ExploreMaps = () => {
   const navigate = useNavigate();
 
+  const [hovered, setHovered] = useState(false);
+
+  console.log(hovered);
+
+  const style = useSpring({
+    transform: hovered ? "scale(1.015)" : "scale(1)",
+    config: {
+      tension: 120,
+      friction: 8,
+    },
+  });
+
   return (
-    <ExploreContainer onClick={() => navigate("/explore")}>
+    <ExploreContainer
+      style={style}
+      onClick={() => navigate("/explore")}
+      onMouseEnter={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => setHovered(false)}
+    >
       <SubTitle>
-        <CompassIcon style={{ margin: "" }} /> Explore Maps
+        <CompassIcon /> Explore Maps
         <CompassIcon />
       </SubTitle>
       <Image src="https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_152295734.jpg" />{" "}
@@ -23,7 +43,6 @@ const Image = styled.img`
   width: 100%;
   height: 90%;
   position: relative;
-  /* max-width: 500px; */
   object-fit: cover;
   border-radius: 6px;
 `;
@@ -36,21 +55,17 @@ const movingBackground = keyframes`
 100%{background-position: right center}
 `;
 
-const ExploreContainer = styled(Container)`
+const ExploreContainer = styled(animated(Container))`
   cursor: pointer;
   color: white;
   background-image: linear-gradient(
     225deg,
-    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.4) 0%,
     rgba(160, 160, 160, 0.6) 50%,
-    rgba(255, 255, 255, 0.5) 100%
+    rgba(255, 255, 255, 0.4) 100%
   );
 
-  &:hover {
-    transform: scale(1.01);
-  }
   background-size: 200%;
-  transition: transform 500ms;
   animation: ${movingBackground} 6s forwards infinite;
 `;
 

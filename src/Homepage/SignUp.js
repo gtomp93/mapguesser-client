@@ -1,15 +1,36 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container } from "./styledComponents";
 import { FiLogIn } from "react-icons/fi";
+import { animated, useSpring } from "react-spring";
 
 const SignUp = () => {
   const { loginWithRedirect } = useAuth0();
+  const [hovered, setHovered] = useState(false);
+
+  console.log(hovered);
+
+  const style = useSpring({
+    transform: hovered ? "scale(1.03)" : "scale(1)",
+    config: {
+      tension: 180,
+      friction: 6,
+    },
+  });
+
   return (
-    <StyledContainer onClick={() => loginWithRedirect()}>
+    <StyledContainer
+      onClick={() => loginWithRedirect()}
+      onMouseEnter={() => {
+        setHovered(true);
+        console.log("Yoyo");
+      }}
+      onMouseLeave={() => setHovered(false)}
+      style={style}
+    >
       <Wrapper>
-        <Message>
+        <Message hovered={hovered}>
           Sign in or sign up to play <FiLogIn style={{ marginLeft: "0px" }} />
         </Message>
       </Wrapper>
@@ -30,11 +51,8 @@ const Wrapper = styled.div`
   background-position: center;
 `;
 
-const StyledContainer = styled(Container)`
+const StyledContainer = styled(animated(Container))`
   padding: 12px 12px 12px;
-  &:hover {
-    transform: scale(1.02);
-  }
   transition: 200ms;
   cursor: pointer;
   min-height: 120px;
@@ -42,6 +60,8 @@ const StyledContainer = styled(Container)`
 
 const Message = styled.p`
   font-size: 35px;
+  margin: 5px 0 0 10px;
+
   @media (max-width: 1266px) {
     font-size: 31px;
   }
@@ -59,4 +79,7 @@ const Message = styled.p`
   font-weight: bold;
   display: flex;
   align-items: center;
+
+  /* &:hover {
+  } */
 `;

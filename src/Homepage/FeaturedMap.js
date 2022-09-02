@@ -95,7 +95,7 @@ const Container = styled.div`
   &:hover {
     transform: scale(1.02);
   }
-  transition: all 500ms;
+  transition: all 400ms;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
