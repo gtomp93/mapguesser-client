@@ -23,7 +23,9 @@ const Globe = styled.div`
   margin: 20px 0 0;
   position: relative;
   z-index: 10;
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/world map stock photo.jpg");
+  /* background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/world map stock photo.jpg"); */
+  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/world+map+stock+photo+-+Cropped.jpg");
+
   background-size: 226px 171px;
   /* background-position: 0px 35%; */
   border-radius: 50%;

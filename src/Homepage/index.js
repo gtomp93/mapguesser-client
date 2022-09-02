@@ -6,7 +6,7 @@ import Featured from "./Featured";
 import CreateMap from "./CreateMap";
 import { Loading } from "../Loading";
 import Error from "../Error";
-import GlobeSpinner from "../Globe";
+import GlobeSpinner from "../Loading/Globe";
 import { ModalContext } from "../Contexts/ModalContext";
 import ProfileLinks from "./ProfileLinks";
 import SignUp from "./SignUp";

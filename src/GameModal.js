@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Comment from "./Comment";
 import { UserContext } from "./Contexts/UserContext";
 import ReactDOM from "react-dom";
@@ -284,6 +284,11 @@ const CreateComment = styled.div`
   padding: 0 0 5px;
 `;
 
+const fadein = keyframes`
+from {opacity:0}
+to{opacity:1}
+`;
+
 const ModalContainer = styled.div`
   position: fixed;
   /* height: 90%; */
@@ -308,6 +313,8 @@ const ModalContainer = styled.div`
   display: ${({ gameInfo }) => (gameInfo ? "flex" : "block")};
   flex-direction: column;
   justify-content: center;
+  transition: 500ms;
+  animation: 750ms ${fadein};
 `;
 
 const CommentInput = styled.textarea`

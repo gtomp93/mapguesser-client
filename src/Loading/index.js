@@ -1,4 +1,4 @@
-import GlobeSpinner from "../Globe";
+import GlobeSpinner from "./Globe";
 
 import React from "react";
 import styled from "styled-components";
