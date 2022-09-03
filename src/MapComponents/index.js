@@ -5,6 +5,8 @@ import { UserContext } from "../Contexts/UserContext";
 import ActionBar from "./ActionBar";
 import { Outlet } from "react-router-dom";
 import { ModalContext } from "../Contexts/ModalContext";
+import { animated, useSpring } from "react-spring";
+import { Loading } from "../Loading";
 
 const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
   const { showModal, setShowModal } = useContext(ModalContext);
@@ -12,8 +14,17 @@ const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
   const { currentUser, setStatus } = useContext(UserContext);
   const [numLikes, setNumLikes] = useState(game.likes);
   const navigate = useNavigate();
+  const [hovered, setHovered] = useState(false);
+
+  const style = useSpring({
+    transform: hovered ? "scale(1.02)" : "scale(1)",
+    config: {
+      tension: 84,
+      friction: 7,
+    },
+  });
   if (!game.comments) {
-    return "loading";
+    return <Loading />;
   }
 
   const likeGame = async () => {
@@ -66,6 +77,11 @@ const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
         navigate(`game/${game._id}?page=${page}`);
         setShowModal(game._id);
       }}
+      onMouseEnter={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => setHovered(false)}
+      style={style}
     >
       <Box>
         <Name type={type}>{game.name}</Name>
@@ -91,17 +107,10 @@ const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
   );
 };
 
-const GameContainer = styled.div`
-  display: ${(props) => (props.deleted ? "none" : "flex")};
-
+const GameContainer = styled(animated.div)`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  transition: 400ms;
-
-  &:hover {
-    transform: scale(1.01);
-  }
   position: relative;
   z-index: 2;
   border-radius: 7px 7px 7px 7px;

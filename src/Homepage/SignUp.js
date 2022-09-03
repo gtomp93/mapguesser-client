@@ -9,8 +9,6 @@ const SignUp = () => {
   const { loginWithRedirect } = useAuth0();
   const [hovered, setHovered] = useState(false);
 
-  console.log(hovered);
-
   const style = useSpring({
     transform: hovered ? "scale(1.03)" : "scale(1)",
     config: {
@@ -24,7 +22,6 @@ const SignUp = () => {
       onClick={() => loginWithRedirect()}
       onMouseEnter={() => {
         setHovered(true);
-        console.log("Yoyo");
       }}
       onMouseLeave={() => setHovered(false)}
       style={style}

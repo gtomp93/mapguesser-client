@@ -12,8 +12,6 @@ const CreateMap = () => {
   const { currentUser, setStatus } = useContext(UserContext);
   const [hovered, setHovered] = useState(false);
 
-  console.log(hovered);
-
   const style = useSpring({
     transform: hovered ? "scale(1.015)" : "scale(1)",
     config: {

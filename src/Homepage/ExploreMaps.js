@@ -10,8 +10,6 @@ const ExploreMaps = () => {
 
   const [hovered, setHovered] = useState(false);
 
-  console.log(hovered);
-
   const style = useSpring({
     transform: hovered ? "scale(1.015)" : "scale(1)",
     config: {
