@@ -30,7 +30,7 @@ const Header = () => {
           to="/"
         >
           <BiWorld size={"40px"} style={{ color: "#5a7bb0" }} />
-          <h1 style={{ marginBottom: "0", color: "#5a7bb0" }}> MapGuesser</h1>
+          <h1 style={{ marginBottom: "0", color: "#5a7bb0" }}> MapBattles</h1>
         </Link>
         {isAuthenticated && (
           <Create

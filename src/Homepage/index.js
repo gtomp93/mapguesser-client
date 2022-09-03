@@ -51,7 +51,7 @@ const Homepage = () => {
       {users && maps ? (
         <>
           <TopWrapper>
-            <Title>MapGuesser</Title>
+            <Title>MapBattles</Title>
             <GlobeSpinner speed={10000} />
             <Cloud />
           </TopWrapper>

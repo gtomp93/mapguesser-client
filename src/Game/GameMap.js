@@ -104,6 +104,8 @@ const GameMap = () => {
     width: "100%",
   };
 
+  console.log(locations);
+
   useEffect(() => {
     if (!locations && currentUser) {
       fetch(`https://mapguesser-server.herokuapp.com/api/getMap/${id}`, {
