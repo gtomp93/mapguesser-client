@@ -29,6 +29,6 @@ export const Container = styled.div`
   flex-direction: column;
   /* margin-top: 80px; */
   @media (max-width: 1414px) {
-    padding: 0 15px 15px;
+    /* padding: 0 15px 15px; */
   }
 `;
