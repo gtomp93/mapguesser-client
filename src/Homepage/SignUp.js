@@ -52,7 +52,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledContainer = styled(animated(Container))`
-  padding: 12px 12px 12px;
+  padding: 12px;
   transition: 200ms;
   cursor: pointer;
   min-height: 120px;
