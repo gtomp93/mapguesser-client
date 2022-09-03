@@ -12,7 +12,6 @@ const ProfileLinks = () => {
           <Title>Liked Maps</Title>
           <StyledFiHeart
             style={{
-              height: "80%",
               display: "block",
               fill: "lightpink",
             }}
@@ -23,7 +22,6 @@ const ProfileLinks = () => {
           <Title>Created Maps</Title>
           <StyledFiMapPin
             style={{
-              height: "75%",
               display: "block",
               fill: "lightgreen",
             }}
@@ -34,8 +32,6 @@ const ProfileLinks = () => {
           <Title>Active Games</Title>
           <StyledFiMap
             style={{
-              height: "80%",
-
               fill: "green",
             }}
           />
@@ -49,6 +45,9 @@ export default ProfileLinks;
 
 const StyledContainer = styled(Container)`
   padding-bottom: 10px;
+  @media (max-width: 750px) {
+    padding: 0px 0 0px;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -58,7 +57,7 @@ const StyledLink = styled(Link)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
+  justify-content: center;
   &:hover {
     transform: scale(1.04);
   }
@@ -81,7 +80,8 @@ const Title = styled.h2`
     font-size: 40px;
   }
   @media (max-width: 450px) {
-    height: 180px;
+    /* height: 180px;
+    height: 100px; */
     width: 100%;
     font-size: 29px;
   }
@@ -102,11 +102,13 @@ const Wrapper = styled.div`
     height: 180px;
     width: 100%;
     flex-direction: row;
+    /* padding: 0px 0 0px; */
   }
 `;
 
 const StyledFiMap = styled(FiMap)`
   width: 33%;
+  height: 60%;
   @media (min-width: 1250px) {
     width: 80%;
   }
@@ -115,6 +117,7 @@ const StyledFiMap = styled(FiMap)`
 const StyledFiMapPin = styled(FiMapPin)`
   width: 25%;
   width: 33%;
+  height: 60%;
 
   @media (min-width: 1250px) {
     width: 80%;
@@ -122,9 +125,8 @@ const StyledFiMapPin = styled(FiMapPin)`
 `;
 
 const StyledFiHeart = styled(FiHeart)`
-  width: 25%;
   width: 33%;
-
+  height: 60%;
   @media (min-width: 1250px) {
     width: 80%;
   }

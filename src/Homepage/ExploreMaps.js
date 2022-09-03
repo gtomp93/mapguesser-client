@@ -62,7 +62,9 @@ const ExploreContainer = styled(animated(Container))`
     rgba(160, 160, 160, 0.6) 50%,
     rgba(255, 255, 255, 0.4) 100%
   );
-
+  @media (max-width: 400px) {
+    padding: 0 12px 14px;
+  }
   background-size: 200%;
   animation: ${movingBackground} 6s forwards infinite;
 `;

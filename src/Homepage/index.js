@@ -140,7 +140,11 @@ const Wrapper = styled.div`
 `;
 
 const Section = styled.div`
-  margin: 20px 30px 20px;
+  margin: 15px 25px 15px;
+
+  @media (min-width: 450px) {
+    margin: 20px 30px 20px;
+  }
 `;
 
 const Section1 = styled(Section)`

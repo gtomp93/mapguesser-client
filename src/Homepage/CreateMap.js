@@ -35,7 +35,7 @@ const CreateMap = () => {
       }}
       onMouseLeave={() => setHovered(false)}
     >
-      <SubTitle style={{ margin: "10px 0 10px" }}>
+      <SubTitle style={{ margin: "8px 0 10px" }}>
         Create Map
         <BiMapPin style={{ fill: "darkRed", marginLeft: "5px" }} />
       </SubTitle>
@@ -62,6 +62,8 @@ const CreateContainer = styled(animated(Container))`
     transform: scale(1.01);
   }
   transition: 400ms; */
-
+  @media (max-width: 400px) {
+    padding: 0 12px 14px;
+  }
   background-size: 200%;
 `;

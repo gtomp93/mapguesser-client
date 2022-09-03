@@ -4,12 +4,23 @@ import styled from "styled-components";
 import ActionBar from "../MapComponents/ActionBar";
 import { ModalContext } from "../Contexts/ModalContext";
 import { UserContext } from "../Contexts/UserContext";
+import { animated, useSpring } from "react-spring";
 const FeaturedMap = ({ game, isLiked, gameId, route }) => {
   const { showModal, setShowModal } = useContext(ModalContext);
   const navigate = useNavigate();
   const { currentUser, setStatus } = useContext(UserContext);
   const [numLikes, setNumLikes] = useState(game.likes);
   const [liked, setLiked] = useState(isLiked);
+
+  const [hovered, setHovered] = useState(false);
+
+  const style = useSpring({
+    transform: hovered ? "scale(1.015)" : "scale(1)",
+    config: {
+      tension: 120,
+      friction: 8,
+    },
+  });
 
   const likeGame = async () => {
     if (!currentUser) {
@@ -62,6 +73,11 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
         }
         ev.stopPropagation();
       }}
+      onMouseEnter={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => setHovered(false)}
+      style={style}
     >
       <Title>{game.name}</Title>
       <Description>{game.description}</Description>
@@ -86,16 +102,12 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
 
 export default FeaturedMap;
 
-const Container = styled.div`
+const Container = styled(animated.div)`
   flex: 1;
   width: 50%;
   height: 100%;
   border-radius: 5px;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.02);
-  }
-  transition: all 400ms;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
