@@ -22,7 +22,7 @@ export const Container = styled.div`
   height: 100%;
   color: black;
   background-color: rgb(240, 240, 240, 0.6);
-  padding: 0 30px 30px;
+  padding: 0 25px 30px;
   -webkit-box-shadow: 5px 5px 4px 5px rgba(0, 0, 0, 0.27);
   box-shadow: 5px 5px 4px 5px rgba(0, 0, 0, 0.27);
   display: flex;
