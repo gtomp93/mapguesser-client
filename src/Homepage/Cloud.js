@@ -41,7 +41,7 @@ const Cloud1 = styled.img`
   position: absolute;
   /* top: -2px; */
   left: 0;
-  width: 100px;
+  width: 120px;
 `;
 
 const Cloud2 = styled(Cloud1)`
