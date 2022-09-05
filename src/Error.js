@@ -10,9 +10,7 @@ const Error = () => {
   const { setStatus, status } = useContext(UserContext);
   return ReactDOM.createPortal(
     <Container>
-      <Message>
-        Please sign up or log in in order to {status.error} a map 😊
-      </Message>{" "}
+      <Message>Please sign up or log in in order to {status.error} 😊</Message>
       <LoginButton errorLogin={true}>Log In</LoginButton>
       <CloseModal
         onClick={(ev) => {

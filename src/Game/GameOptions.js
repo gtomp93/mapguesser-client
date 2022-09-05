@@ -5,20 +5,21 @@ import { BiAlarm, BiAlarmOff } from "react-icons/bi";
 
 import styled from "styled-components";
 import { UserContext } from "../Contexts/UserContext";
-
+import { ModalContext } from "../Contexts/ModalContext";
+import Error from "../Error";
 const GameOptions = () => {
   const { id } = useParams();
-  const { currentUser } = useContext(UserContext);
+  let navigate = useNavigate();
+  const { currentUser, setStatus, status } = useContext(UserContext);
   const [playerMode, setPlayerMode] = useState(null);
   const [timeMode, setTimeMode] = useState(null);
-  let navigate = useNavigate();
   const [gameLink, setGameLink] = useState(null);
   const [newGameId, setNewGameId] = useState(null);
   const createGame = async (timeMode) => {
     let randomLocations = null;
     let mapName = null;
     let gameId = null;
-    await fetch(`https://mapguesser-server.herokuapp.com/api/locations/${id}`)
+    await fetch(`http://localhost:5000/api/locations/${id}`)
       .then((res) => res.json())
       .then((res) => {
         randomLocations = res.randomLocations;
@@ -29,11 +30,11 @@ const GameOptions = () => {
         console.log(err.stack);
       });
 
-    await fetch("https://mapguesser-server.herokuapp.com/api/createGame", {
+    await fetch("http://localhost:5000/api/createGame", {
       method: "POST",
       body: JSON.stringify({
         player: currentUser,
-        icon: currentUser.picture,
+        icon: currentUser?.picture,
         locations: randomLocations,
         mode: playerMode,
         name: mapName,
@@ -48,6 +49,9 @@ const GameOptions = () => {
         gameId = res.gameId;
 
         if (playerMode === "single") {
+          if (!currentUser) {
+            localStorage.setItem("game", JSON.stringify(gameId));
+          }
           navigate(`/map/${gameId}`);
         } else {
           setGameLink(`https://mapguesser-client.herokuapp.com/map/${gameId}`);
@@ -59,6 +63,9 @@ const GameOptions = () => {
 
   return (
     <Container>
+      {status && status !== "noName" && (
+        <Error status={status} setStatus={setStatus} />
+      )}
       <Wrapper
         style={{
           marginTop: "25px",
@@ -80,7 +87,13 @@ const GameOptions = () => {
             <div>Single Player</div>
           </ModeButton>
           <ModeButton
-            onClick={() => {
+            onClick={(ev) => {
+              if (!currentUser) {
+                setStatus({ error: "play in multiplayer mode" });
+                ev.preventDefault();
+                ev.stopPropagation();
+                return;
+              }
               setPlayerMode("multi");
             }}
             style={playerMode === "multi" ? { background: "#2bc425" } : null}

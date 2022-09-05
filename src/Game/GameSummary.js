@@ -13,7 +13,7 @@ const GameSummary = () => {
     <>
       <StyledTable>
         <tr>
-          <StyledTableHeader>Name</StyledTableHeader>
+          {currentUser && <StyledTableHeader>Name</StyledTableHeader>}
           <StyledTableHeader>Round 1</StyledTableHeader>
           <StyledTableHeader>Round 2</StyledTableHeader>
           <StyledTableHeader>Round 3</StyledTableHeader>
@@ -23,7 +23,9 @@ const GameSummary = () => {
         </tr>
 
         <StyledRow>
-          <StyledTableData>{currentUser.givenName}</StyledTableData>
+          {currentUser && (
+            <StyledTableData>{currentUser.givenName}</StyledTableData>
+          )}
           {myGameData.map((round) => {
             return (
               <StyledTableData>

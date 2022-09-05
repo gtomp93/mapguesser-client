@@ -29,7 +29,7 @@ const Map = ({ game, isLiked, index, type, gameId, route, page }) => {
 
   const likeGame = async () => {
     if (!currentUser) {
-      setStatus({ error: "like" });
+      setStatus({ error: "like a map" });
       return;
     }
 

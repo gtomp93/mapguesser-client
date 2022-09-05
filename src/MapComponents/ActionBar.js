@@ -74,12 +74,12 @@ const ActionBar = ({
           setShowModal(false);
           ev.stopPropagation();
 
-          if (!currentUser) {
-            setStatus({ error: "play" });
-            ev.preventDefault();
-            ev.stopPropagation();
-            return;
-          }
+          // if (!currentUser) {
+          //   setStatus({ error: "play" });
+          //   ev.preventDefault();
+          //   ev.stopPropagation();
+          //   return;
+          // }
         }}
         to={`/gameOptions/${game._id}`}
       >

@@ -103,10 +103,14 @@ const GameMap = () => {
     left: "0",
     width: "100%",
   };
+  console.log(id === JSON.parse(localStorage.getItem("game")));
 
   useEffect(() => {
-    if (!locations && currentUser) {
-      fetch(`https://mapguesser-server.herokuapp.com/api/getMap/${id}`, {
+    if (
+      (!locations && currentUser) ||
+      id === JSON.parse(localStorage.getItem("game"))
+    ) {
+      fetch(`http://localhost:5000/api/getMap/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ currentUser }),
         headers: {
@@ -243,7 +247,7 @@ const GameMap = () => {
 
   return (
     <>
-      <PageContainer picture={currentUser.picture} style={{}} beforeunload>
+      <PageContainer picture={currentUser?.picture}>
         <BigWrapper guessed={guessed}>
           {/* {timed === "timed" && <div>{timer}</div>} */}
           <MapsWrapper guessed={guessed}>
@@ -290,12 +294,17 @@ const GameMap = () => {
                             position={guess}
                           >
                             <img
-                              src={currentUser.picture}
+                              src={
+                                currentUser
+                                  ? currentUser?.picture
+                                  : "https://google-maps-bucket.s3.us-east-2.amazonaws.com/Compass-.jpg"
+                              }
                               style={{
                                 marginRight: "0",
                                 marginBottom: "0",
                                 borderRadius: "50%",
                                 width: "30px",
+                                height: "30px",
                                 transform: "translate(-15px,-15px)",
                               }}
                             />
@@ -359,7 +368,11 @@ const GameMap = () => {
                                     position={guess}
                                   >
                                     <img
-                                      src={currentUser.picture}
+                                      src={
+                                        currentUser
+                                          ? currentUser?.picture
+                                          : "https://google-maps-bucket.s3.us-east-2.amazonaws.com/Compass-.jpg"
+                                      }
                                       style={{
                                         marginRight: "0",
                                         marginBottom: "0",

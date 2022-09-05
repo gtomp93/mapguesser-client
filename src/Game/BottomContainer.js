@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { BsArrowsFullscreen } from "react-icons/bs";
+import { BsArrowsFullscreen, BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { calculateScore } from "./calculateScore";
 import { GameContext } from "./GameContext";
 
@@ -118,6 +118,7 @@ const BottomContainer = ({
       )}
       {!guessed && (
         <div style={{ display: "flex" }}>
+          {hide && <StyledArrow size={50} />}{" "}
           <StyledButton
             onClick={() => {
               setHide(!hide);
@@ -198,6 +199,24 @@ const StyledButton = styled.button`
     background-color: rgba(0, 0, 0, 0.2);
     box-shadow: none;
   }
+`;
+
+const moveArrow = keyframes`
+0%{
+  transform: translateX(0) ;
+}
+50%{
+  transform: translateX(-100px) ;
+}
+100%{
+  transform: translateX(0) ;
+
+}
+`;
+
+const StyledArrow = styled(BsArrowRight)`
+  color: red;
+  animation: ${moveArrow} 4s forwards infinite;
 `;
 
 const TimerDisplay = styled.div`

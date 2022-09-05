@@ -65,7 +65,7 @@ export default function GameModal() {
 
   const submitComment = async (comment, ev) => {
     if (!currentUser) {
-      setStatus({ error: "comment" });
+      setStatus({ error: "comment on a map" });
       ev.preventDefault();
       ev.stopPropagation();
       return;
@@ -155,7 +155,7 @@ export default function GameModal() {
                   } else if (viewMore) {
                     return <Comment key={index} comment={comment} />;
                   } else {
-                    return <React.Fragment></React.Fragment>;
+                    return <React.Fragment key={index}></React.Fragment>;
                   }
                 })}
               </CommentsContainer>{" "}
@@ -215,6 +215,7 @@ const Overlay = styled.div`
 const Title = styled.h1`
   margin: 0;
   flex: 0;
+  color: rgba(1, 2, 109, 1);
 `;
 
 const CloseModal = styled.button`
@@ -236,6 +237,7 @@ const Description = styled.h2`
 `;
 
 const Creator = styled.p`
+  margin-bottom: 7px;
   flex: 0;
 `;
 

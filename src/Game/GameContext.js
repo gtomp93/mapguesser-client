@@ -128,7 +128,7 @@ export const GameContextProvider = ({ children }) => {
   const [countDown, setCountdown] = useState(6);
   const navigate = useNavigate();
   useEffect(() => {
-    if (countDown < 1 && !currentUser) {
+    if (countDown < 1 && !currentUser && gameState?.playerMode === "multi") {
       setStatus({ error: "play" });
       navigate("/");
     } else {
@@ -225,7 +225,7 @@ export const GameContextProvider = ({ children }) => {
       gameData,
     });
 
-    await fetch("https://mapguesser-server.herokuapp.com/api/submitGuess", {
+    await fetch("http://localhost:5000/api/submitGuess", {
       method: "PATCH",
       body: JSON.stringify({
         mode: gameState.playerMode,
@@ -236,7 +236,7 @@ export const GameContextProvider = ({ children }) => {
         guess: clickspotLat ? { lat: clickspotLat, lng: clickSpotLng } : null,
         thirdPoint,
         center: { lat, lng },
-        player: currentUser.email,
+        player: currentUser?.email,
         midpoint: { lat, lng },
       }),
       headers: {
@@ -244,29 +244,26 @@ export const GameContextProvider = ({ children }) => {
       },
     });
 
-    if (endGame)
-      await fetch(
-        "https://mapguesser-server.herokuapp.com/api/updateUserScore",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            _id: currentUser._id,
-            score: gameState.gameScore + score,
-          }),
-        }
-      )
+    if (endGame && currentUser)
+      await fetch("http://localhost:5000/api/updateUserScore", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: currentUser._id,
+          score: gameState.gameScore + score,
+        }),
+      })
         .then((res) => res.json())
         .then((res) => {});
   };
 
   const resetMap = async () => {
-    await fetch("https://mapguesser-server.herokuapp.com/api/nextLocation", {
+    await fetch("http://localhost:5000/api/nextLocation", {
       method: "PATCH",
       body: JSON.stringify({
-        player: currentUser.email,
+        player: currentUser?.email,
         mode: gameState.playerMode,
         _id: gameState._id,
       }),
