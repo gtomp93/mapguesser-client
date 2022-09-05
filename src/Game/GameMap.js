@@ -110,7 +110,7 @@ const GameMap = () => {
       (!locations && currentUser) ||
       id === JSON.parse(localStorage.getItem("game"))
     ) {
-      fetch(`http://localhost:5000/api/getMap/${id}`, {
+      fetch(`https://mapguesser-server.herokuapp.com/api/getMap/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ currentUser }),
         headers: {
@@ -506,6 +506,7 @@ const GameMap = () => {
             setClickedLng={setClickedLng}
             viewSummary={viewSummary}
             otherPlayerData={otherPlayerData}
+            locationIndex={locationIndex}
           />
           {viewSummary && <GameSummary />}{" "}
         </BigWrapper>

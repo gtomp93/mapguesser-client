@@ -225,7 +225,7 @@ export const GameContextProvider = ({ children }) => {
       gameData,
     });
 
-    await fetch("http://localhost:5000/api/submitGuess", {
+    await fetch("https://mapguesser-server.herokuapp.com/api/submitGuess", {
       method: "PATCH",
       body: JSON.stringify({
         mode: gameState.playerMode,
@@ -245,22 +245,25 @@ export const GameContextProvider = ({ children }) => {
     });
 
     if (endGame && currentUser)
-      await fetch("http://localhost:5000/api/updateUserScore", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          _id: currentUser._id,
-          score: gameState.gameScore + score,
-        }),
-      })
+      await fetch(
+        "https://mapguesser-server.herokuapp.com/api/updateUserScore",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            _id: currentUser._id,
+            score: gameState.gameScore + score,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((res) => {});
   };
 
   const resetMap = async () => {
-    await fetch("http://localhost:5000/api/nextLocation", {
+    await fetch("https://mapguesser-server.herokuapp.com/api/nextLocation", {
       method: "PATCH",
       body: JSON.stringify({
         player: currentUser?.email,

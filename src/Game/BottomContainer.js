@@ -19,6 +19,7 @@ const BottomContainer = ({
   resetMap,
   setViewSummary,
   hide,
+  locationIndex,
   setClickedLat,
   setClickedLng,
   viewSummary,
@@ -118,7 +119,7 @@ const BottomContainer = ({
       )}
       {!guessed && (
         <div style={{ display: "flex" }}>
-          {hide && <StyledArrow size={40} />}{" "}
+          {hide && locationIndex === 0 && <StyledArrow size={40} />}{" "}
           <StyledButton
             onClick={() => {
               setHide(!hide);

@@ -19,7 +19,7 @@ const GameOptions = () => {
     let randomLocations = null;
     let mapName = null;
     let gameId = null;
-    await fetch(`http://localhost:5000/api/locations/${id}`)
+    await fetch(`https://mapguesser-server.herokuapp.com/api/locations/${id}`)
       .then((res) => res.json())
       .then((res) => {
         randomLocations = res.randomLocations;
@@ -30,7 +30,7 @@ const GameOptions = () => {
         console.log(err.stack);
       });
 
-    await fetch("http://localhost:5000/api/createGame", {
+    await fetch("https://mapguesser-server.herokuapp.com/api/createGame", {
       method: "POST",
       body: JSON.stringify({
         player: currentUser,
