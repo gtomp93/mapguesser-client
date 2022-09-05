@@ -175,8 +175,6 @@ const GameOptions = () => {
 const Container = styled.div`
   width: 100%;
   height: calc(100vh - 44px);
-  background-image: url("https://google-maps-bucket.s3.us-east-2.amazonaws.com/shutterstock_693729124.jpg");
-  background-size: cover;
   display: flex;
   justify-content: center;
 `;
