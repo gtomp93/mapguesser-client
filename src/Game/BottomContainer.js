@@ -118,7 +118,7 @@ const BottomContainer = ({
       )}
       {!guessed && (
         <div style={{ display: "flex" }}>
-          {hide && <StyledArrow size={50} />}{" "}
+          {hide && <StyledArrow size={40} />}{" "}
           <StyledButton
             onClick={() => {
               setHide(!hide);

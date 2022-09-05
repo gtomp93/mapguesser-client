@@ -566,7 +566,7 @@ const PageContainer = styled.div`
   justify-content: center;
   width: 100vw;
   height: calc(100vh - 44px);
-  overflow: auto;
+  /* overflow: auto; */
   padding: 20px;
 `;
 
@@ -579,7 +579,7 @@ const BigWrapper = styled.div`
   width: 100%;
   height: 100%;
   @media (min-width: 600px) {
-    width: 80%;
+    width: 70%;
   }
 
   @media (min-width: 501px) and (max-height: 420px) {
@@ -619,6 +619,7 @@ const MapsWrapper = styled.div`
       }
     `};
   aspect-ratio: 9/5;
+  background-color: red;
 `;
 
 const Message = styled.div`
