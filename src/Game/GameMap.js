@@ -619,7 +619,6 @@ const MapsWrapper = styled.div`
       }
     `};
   aspect-ratio: 9/5;
-  background-color: red;
 `;
 
 const Message = styled.div`

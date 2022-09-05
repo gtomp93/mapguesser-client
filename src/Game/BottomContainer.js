@@ -206,7 +206,7 @@ const moveArrow = keyframes`
   transform: translateX(0) ;
 }
 50%{
-  transform: translateX(-100px) ;
+  transform: translateX(-70px) ;
 }
 100%{
   transform: translateX(0) ;
