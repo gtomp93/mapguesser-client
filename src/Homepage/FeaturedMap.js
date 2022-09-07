@@ -24,7 +24,7 @@ const FeaturedMap = ({ game, isLiked, gameId, route }) => {
 
   const likeGame = async () => {
     if (!currentUser) {
-      setStatus({ error: "like" });
+      setStatus({ error: "like a map" });
       return;
     }
 

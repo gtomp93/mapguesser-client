@@ -23,7 +23,7 @@ export default function GameModal() {
 
   const likeGame = async () => {
     if (!currentUser) {
-      setStatus({ error: "like" });
+      setStatus({ error: "like a map" });
       return;
     }
 

@@ -39,7 +39,7 @@ const Header = () => {
               if (currentUser) {
                 Navigate("/CreateMapForm");
               } else {
-                setStatus({ error: "create" });
+                setStatus({ error: "create a map." });
               }
             }}
           >

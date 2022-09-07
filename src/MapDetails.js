@@ -21,7 +21,7 @@ const MapDetails = () => {
   const [numLikes, setNumLikes] = useState(0);
   const likeGame = async () => {
     if (!currentUser) {
-      setStatus({ error: "like" });
+      setStatus({ error: "like a a map" });
       return;
     }
 
@@ -63,7 +63,7 @@ const MapDetails = () => {
 
   const submitComment = async (comment, ev) => {
     if (!currentUser) {
-      setStatus({ error: "comment" });
+      setStatus({ error: "comment on a map" });
       ev.preventDefault();
       ev.stopPropagation();
       return;
