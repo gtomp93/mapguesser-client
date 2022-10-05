@@ -102,7 +102,7 @@ const BottomContainer = ({
           ) : (
             <StyledButton
               onClick={() => {
-                let zoom = calculateScore(guessDistance, guess.lat).zoom;
+                let zoom = calculateScore(guessDistance, guess?.lat).zoom;
                 dispatch({
                   type: "closeSummary",
                   center: myGameData[4].midpoint,
